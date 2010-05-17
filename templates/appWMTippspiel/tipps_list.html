@@ -1,0 +1,16 @@
+{% if object_list %}
+<h1>Tipps</h1>
+<ul>
+{% for tipps in object_list %}
+<li>
+<span>{{tipps.user}}</span>
+<span>{{tipps.begegnung}}</span>
+<span>{{tipps.toreHeim}}</span>
+<span>{{tipps.toreGast}}</span>
+</li>
+{% endfor %} 
+</ul>
+{% else %}
+
+No polls are available.
+{% endif %} 
