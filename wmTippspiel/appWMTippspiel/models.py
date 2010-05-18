@@ -33,6 +33,7 @@ class Tipps(models.Model):
     
     toreHeim = models.IntegerField(max_length=2) 
     toreGast = models.IntegerField(max_length=2) 
+    tippDatum = models.DateTimeField()
     
     def __unicode__(self):
         return u'%s %s' % (self.user, self.begegnung)

@@ -33,7 +33,8 @@ def index(request):
     <div><a href="accounts/login/?next=/">Login</a></div>
     <div><a href="accounts/logout/">Logout</a></div>
     <div><a href="tippspiel/begegnungen/">Begegnungen</a></div>
-    <div><a href="tippspiel/tipps/">Tipps</a></div>
+    <!-- <div><a href="tippspiel/tipps/">Tipps</a></div> -->
+    <div><a href="tippspiel/usertipps/">Usertipps</a></div>
     
     ''')
     
