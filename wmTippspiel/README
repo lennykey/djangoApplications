@@ -1,18 +1,23 @@
 Tippspiel
 
 Beschreibung:
-Es soll ein Fußballtippspiel entstehen, bei dem User auf Ergebnisse der Bundesliga tippen können. 
+Es soll ein Fußballtippspiel entstehen, bei dem User auf Ergebnisse der WM 2010 
+tippen können. 
 
-Jeder User darf/kann auf Spiele der aktuellen Saison sein Tipp abgeben können, für Hin- und Rückspiel. Der User darf, wenn maximal eine halbe Stunde vor Spiel noch sein Tipp für den aktuellen Spieltag/Spiel abgeben. 
+Jeder User darf/kann auf Spiele der aktuellen Saison sein Tipp abgeben können
+von Gruppenspielen bis zum Finale.
+Der User darf, wenn maximal eine halbe Stunde vor Spiel noch sein Tipp für den
+aktuellen Spieltag/Spiel abgeben. 
 
 UseCases:
 User wählt eine Begegnung und gibt sein Tipp ab
-User verändert sein Tipp
+User verändert sein Tipp, dies darf er solange bis zur einer halben Stunde vor
+Spielbeginn
 User kann seinen momentanen Stand in der Rangliste bzw. Punkte einsehen
 
 
 Klassen:
 Mannschaften
 Begegnungen
-User
+User (aus Django)
 Tipps
