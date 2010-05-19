@@ -33,9 +33,10 @@ def index(request):
     <div><a href="time/">What time ist it?</a></div>
     <div><a href="accounts/login/?next=/">Login</a></div>
     <div><a href="accounts/logout/">Logout</a></div>
-    <div><a href="tippspiel/begegnungen/">Begegnungen</a></div>
+    <div><a href="tippspiel/begegnungen/">Alle Begegnungen</a></div>
     <!-- <div><a href="tippspiel/tipps/">Tipps</a></div> -->
-    <div><a href="tippspiel/usertipps/">Usertipps</a></div>
+    <div><a href="tippspiel/usertipps/">Meine Tipps</a></div>
+    <div><a href="tippspiel/tippen/">Jetzt tippen</a></div>
     
     ''')
     

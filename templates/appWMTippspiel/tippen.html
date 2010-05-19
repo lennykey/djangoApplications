@@ -1,0 +1,14 @@
+<h2>Moegliche Tipps fuer {{username}}</h2>
+
+{% if begegnungen %}
+    <p>Gefunden {{ begegnungen|length }} Begegnung{{ begegnungen|pluralize }}.</p>
+    <ul>
+        {% for begegnung in begegnungen %}
+        <li>{{ begegnung.mannschaftHeim }} vs. {{ begegnung.mannschaftGast}}
+        <strong>{{ begegnung.art}}</strong> {{ begegnung.datum}}
+        <a href="/tippspiel/tippen/tipp-form/{{ begegnung.id }}">Jetzt tippen</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No Begegnung matched your search criteria.</p>
+{% endif %}

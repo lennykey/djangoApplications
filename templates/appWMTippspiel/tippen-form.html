@@ -1,0 +1,14 @@
+{% ifequal request.method 'GET' %}
+<h1>Begegnungen</h1>
+<form method="POST" action="tippausfuehren">
+<input type="text" name="username" value="{{ username }}" />
+<input type="submit" name="senden" value="Senden">
+</form>
+ 
+{% else %}
+<form>
+<input type="text" name="username" />
+</form>
+
+form.username
+{% endifequal %} 
