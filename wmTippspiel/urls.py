@@ -1,5 +1,5 @@
 from django.conf.urls.defaults import *
-from wmTippspiel.views import index, current_datetime, mylogin, mylogout
+from wmTippspiel.views import index, current_datetime, mylogin, mylogout, display_meta
 from django.contrib import admin
 
 
@@ -15,6 +15,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     (r'^$', index ),    
     (r'^time/$', current_datetime ),
+    (r'^displaymeta/$', display_meta ),
     #(r'^login/$', mylogin ),
     (r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'next_page':'/'}),
     (r'^accounts/login/$', 'django.contrib.auth.views.login'),

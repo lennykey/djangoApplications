@@ -12,6 +12,10 @@ info_dict_tipps = {
 }
 
 urlpatterns = patterns('',
+    # Generic views muessen z.B. im mein Templateverzeichnis liegen, und ein 
+    # Unterverzeichnis muss fuer die jeweilige Applikation erstellt werdern.
+    # Falls eine normale View mit Template angelegt wird, muss diese in ein
+    # Unterverzeichnis innerhalb der App mit de namen 'templates' gelegt werden. 
     (r'^$', 'django.views.generic.list_detail.object_list', info_dict),
     (r'^begegnungen/$', 'django.views.generic.list_detail.object_list', info_dict),
     (r'^tipps/$', 'django.views.generic.list_detail.object_list', info_dict_tipps),

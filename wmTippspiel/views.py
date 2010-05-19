@@ -29,6 +29,7 @@ def index(request):
     #    ''')
     
     return HttpResponse('''<h1>Welcome to our super WM Tippspiel</h1>
+    <div><a href="displaymeta/">Display Meta Information</a></div>
     <div><a href="time/">What time ist it?</a></div>
     <div><a href="accounts/login/?next=/">Login</a></div>
     <div><a href="accounts/logout/">Logout</a></div>
@@ -86,4 +87,14 @@ def current_datetime(request):
     html = "<html><body>It is now %s. Username: %s</body></html>" % (now, myUser.username)
     
     return HttpResponse(html)
+
+
+def display_meta(request):
+    values = request.META.items()
+    values.sort()
+    html = []
+    for k, v in values:
+        html.append('<tr><td>%s</td><td>%s</td></tr>' % (k, v))
+    return HttpResponse('<table>%s</table>' % '\n'.join(html))
+
 
