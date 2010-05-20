@@ -3,6 +3,7 @@ from wmTippspiel.appWMTippspiel.models import Tipps, Begegnung
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response
 from django.contrib.auth.models import User
+from datetime import datetime
 
 
 # Create your views here.
@@ -50,7 +51,7 @@ def tippen(request):
                               {'begegnungen': begegnungen, 'username': username})
     #return HttpResponse('Test')
     
-    
+@login_required   
 def tippenForm(request, begegnungID): 
     ''' 
     This view lists the Begegnungen to the logged in user and makes posible to 
@@ -58,15 +59,18 @@ def tippenForm(request, begegnungID):
     '''
     username = request.user.username
     userpk = request.user.pk
-    begegnungen = Begegnung.objects.filter(pk=begegnungID)
+    begegnung = Begegnung.objects.get(pk=begegnungID)
+    
+    tipp = Tipps.objects.get(begegnung=begegnung)
     
     print begegnungID 
     
     
     return render_to_response('appWMTippspiel/tippen-form.html',
-                              {'begegnungen': begegnungen, 'username': username, 'request': request})
+                              {'begegnung': begegnung, 'username': username, 
+                               'request': request, 'tipp': tipp})
     #return HttpResponse('Test')
-    
+@login_required    
 def tippAusfuehren(request): 
     ''' 
     This view lists the Begegnungen to the logged in user and makes posible to 
@@ -75,20 +79,60 @@ def tippAusfuehren(request):
     username = request.user.username
     userpk = request.user.pk
     
-    myUser = User.objects.get(pk=1)
-    myBegegnung = Begegnung.objects.get(pk=1)
+    begegnungID= request.POST['begegnungID']
     
-    ''' Hier das Speichern to do ...'''
+    user = User.objects.get(pk=userpk)
+    begegnung = Begegnung.objects.get(pk=begegnungID)
+    userTipps = Tipps.objects.filter(user=user.pk)
+    userTipps = list(str(i) for i in userTipps)
+    print userTipps
     
-    tipp = Tipps(user=myUser, begegnung=myBegegnung, toreHeim=2, toreGast=3, tippDatum="2010-05-12 13:00")
+    jetzt = datetime.now().isoformat()[0:16]
     
-    print tipp.user
-    print tipp.begegnung
-    print tipp.toreHeim
-    print tipp.toreGast
-    print tipp.tippDatum
+    tippDatum = datetime.strptime(jetzt, "%Y-%m-%dT%H:%M")
+
+    toreHeim = request.POST['toreHeim']
+    toreGast = request.POST['toreGast']
     
-    return HttpResponse('Test')    
+    tipp = Tipps(user=user, begegnung=begegnung, toreHeim=toreHeim,
+                  toreGast=toreGast, tippDatum=tippDatum)
+    
+    begegnungDatumVergleich = datetime.strptime(begegnung.datum.isoformat()[0:16],
+                                                 "%Y-%m-%dT%H:%M" )
+    jetztDatumVergleich = datetime.strptime(jetzt, "%Y-%m-%dT%H:%M")
+    
+    print begegnungDatumVergleich
+    print jetztDatumVergleich
+    
+    if str(tipp) in userTipps and (jetztDatumVergleich <= begegnungDatumVergleich):
+        changeTipp = Tipps.objects.get(user=userpk, begegnung=begegnungID) 
+        changeTipp.toreHeim= toreHeim
+        changeTipp.toreGast= toreGast
+        changeTipp.tippDatum = tippDatum 
+        
+        changeTipp.save()
+        
+        return HttpResponse('Spiel wurde veraendert')
+    
+    elif str(tipp) not in userTipps and (jetztDatumVergleich <= begegnungDatumVergleich):
+        tipp.save()
+        
+    elif jetztDatumVergleich >= begegnungDatumVergleich: 
+        return HttpResponse('Das Spiel liegt in der Vergangenheit')
+    else:
+        return HttpResponse('Es ist ein Fehler augetretetn! Jetzt: %s Datum Begegnung: %s'
+                             % (datetime.now().isoformat()[0:16], begegnung.datum.isoformat()[0:16]))
+        
+    
+    print "begegnungID: " + begegnungID
+    print user
+    print begegnung
+    print toreHeim
+    print toreGast
+    print tippDatum 
+    
+    
+    return HttpResponse('Folgender Tipp wurde ausgefuehrt %s Tore: %s : %s vom User: %s' % (begegnung, toreHeim, toreGast, user) )    
     
     
     
