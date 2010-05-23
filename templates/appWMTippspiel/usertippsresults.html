@@ -4,7 +4,7 @@
     <p>Gefunden {{ tipps|length }} Tipp{{ tipps|pluralize }}.</p>
     <ul>
         {% for tipp in tipps %}
-        <li>{{ tipp }}</li>
+        <li>{{ tipp }} <a href="/tippspiel/tippen/tipp-form/{{ tipp.begegnung.pk }}">Jetzt tippen</a</li>
         {% endfor %}
     </ul>
 {% else %}

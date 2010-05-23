@@ -17,7 +17,7 @@ urlpatterns = patterns('',
     # Falls eine normale View mit Template angelegt wird, muss diese in ein
     # Unterverzeichnis innerhalb der App mit de namen 'templates' gelegt werden. 
     (r'^$', 'django.views.generic.list_detail.object_list', info_dict),
-    (r'^begegnungen/$', 'django.views.generic.list_detail.object_list', info_dict),
+    #(r'^begegnungen/$', 'django.views.generic.list_detail.object_list', info_dict),
     (r'^tipps/$', 'django.views.generic.list_detail.object_list', info_dict_tipps),
     
     (r'^usertipps/$', userTipps),

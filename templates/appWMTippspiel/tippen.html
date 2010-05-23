@@ -1,3 +1,5 @@
+
+
 <h2>Moegliche Tipps fuer {{username}}</h2>
 
 {% if begegnungen %}
@@ -6,7 +8,12 @@
         {% for begegnung in begegnungen %}
         <li>{{ begegnung.mannschaftHeim }} vs. {{ begegnung.mannschaftGast}}
         <strong>{{ begegnung.art}}</strong> {{ begegnung.datum}}
-        <a href="/tippspiel/tippen/tipp-form/{{ begegnung.id }}">Jetzt tippen</a></li>
+        {% if begegnung in tipps%}
+        <a href="/tippspiel/tippen/tipp-form/{{begegnung.id}}">Aendern</a>
+        {% else %}
+        <a href="/tippspiel/tippen/tipp-form/{{begegnung.id}}">Jetzt Tippen</a>
+        {% endif %}
+          
         {% endfor %}
     </ul>
 {% else %}

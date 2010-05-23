@@ -1,5 +1,5 @@
 {% ifequal request.method 'GET' %}
-<h1>Begegnungen</h1>
+<h1>Mein Tipp</h1>
 <form method="POST" action="tippausfuehren">
 <span>{{ begegnung }}</span>
 <input type="text" name="toreHeim" value={{tipp.toreHeim}} />

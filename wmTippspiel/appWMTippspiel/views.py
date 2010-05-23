@@ -44,11 +44,13 @@ def tippen(request):
     username = request.user.username
     userpk = request.user.pk
     begegnungen = Begegnung.objects.all()
+    tipps = [i.begegnung for i in Tipps.objects.filter(user=userpk)]
     
     
     
     return render_to_response('appWMTippspiel/tippen.html',
-                              {'begegnungen': begegnungen, 'username': username})
+                              {'begegnungen': begegnungen, 'username': username,
+                               'tipps': tipps})
     #return HttpResponse('Test')
     
 @login_required   
@@ -60,8 +62,17 @@ def tippenForm(request, begegnungID):
     username = request.user.username
     userpk = request.user.pk
     begegnung = Begegnung.objects.get(pk=begegnungID)
+    user = User.objects.get(pk=userpk)
+    tippDatum = datetime.now()
     
-    tipp = Tipps.objects.get(begegnung=begegnung)
+    
+    try:
+        tipp = Tipps.objects.get(begegnung=begegnung)
+    except:
+        tipp = Tipps(user=user, begegnung=begegnung, toreHeim=0, toreGast=0,
+                     tippDatum=tippDatum.strftime("%Y-%m-%d %H:%M"))
+        #tipp.save()
+        #tipp = Tipps.objects.get(begegnung=begegnung)
     
     print begegnungID 
     
@@ -118,10 +129,13 @@ def tippAusfuehren(request):
         tipp.save()
         
     elif jetztDatumVergleich >= begegnungDatumVergleich: 
-        return HttpResponse('Das Spiel liegt in der Vergangenheit')
+        return HttpResponse('Das Spiel liegt in der Vergangenheit. Auf das Spiel \
+                             kann nicht mehr gewettet werden')
     else:
-        return HttpResponse('Es ist ein Fehler augetretetn! Jetzt: %s Datum Begegnung: %s'
-                             % (datetime.now().isoformat()[0:16], begegnung.datum.isoformat()[0:16]))
+        return HttpResponse('Es ist ein Fehler augetretetn! Jetzt: %s Datum \
+                             Begegnung: %s'
+                             % (datetime.now().isoformat()[0:16], 
+                                begegnung.datum.isoformat()[0:16]))
         
     
     print "begegnungID: " + begegnungID
