@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import *
 from wmTippspiel.appWMTippspiel.models import Begegnung, Tipps 
-from wmTippspiel.appWMTippspiel.views import userTipps, tippen, tippenForm, tippAusfuehren
+from wmTippspiel.appWMTippspiel.views import userTipps, tippen, tippenForm, tippAusfuehren, punkteAuswerten
 
 info_dict = {
     'queryset': Begegnung.objects.all(),
@@ -24,6 +24,7 @@ urlpatterns = patterns('',
     (r'^tippen/$', tippen),
     (r'^tippen/tipp-form/(\d+)$', tippenForm),
     (r'^tippen/tipp-form/tippausfuehren$', tippAusfuehren),
+    (r'^punkte/$', punkteAuswerten),
    
     #(r'^(?P<object_id>\d+)/$', 'django.views.generic.list_detail.object_detail',
     #  info_dict),

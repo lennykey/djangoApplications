@@ -37,6 +37,7 @@ def index(request):
     <!-- <div><a href="tippspiel/tipps/">Tipps</a></div> -->
     <div><a href="tippspiel/usertipps/">Meine Tipps</a></div>
     <div><a href="tippspiel/tippen/">Jetzt tippen</a></div>
+    <div><a href="tippspiel/punkte/">Punkte</a></div>
     
     ''')
     

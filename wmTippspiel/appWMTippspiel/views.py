@@ -148,5 +148,72 @@ def tippAusfuehren(request):
     
     return HttpResponse('Folgender Tipp wurde ausgefuehrt %s Tore: %s : %s vom User: %s' % (begegnung, toreHeim, toreGast, user) )    
     
+@login_required
+def punkteAuswerten(request):
+    
+    userpk = request.user.pk
+    username = request.user.username
     
     
+    print userpk
+    
+    now = datetime.strptime(datetime.now().isoformat()[0:16],
+                                                 "%Y-%m-%dT%H:%M" )
+    begegnungenAbgelaufen = Begegnung.objects.filter(datum__lt = now)
+    
+   
+    userPunkteListeAll= []
+
+    alleUser = User.objects.all()
+
+    for aktuellerUser in alleUser:
+    
+        punkte = 0
+        
+        aktuellerUsername = aktuellerUser.username
+        aktuellerUserpk = aktuellerUser.pk 
+        
+        userTipps = Tipps.objects.filter(user=aktuellerUserpk)
+        print 'Usertipps  %s ' % userTipps
+        print 'aktuellerUsername: %s' % aktuellerUsername 
+        
+        for begegnung in begegnungenAbgelaufen:
+            for userTipp in userTipps:
+                if userTipp.begegnung == begegnung and begegnung.toreHeim == userTipp.toreHeim and begegnung.toreGast == userTipp.toreHeim:
+                    print 'Begegnung %s' % begegnung.pk
+                    print 'Begegnung %s' % begegnung
+                    print 'Begegnung ToreHeim %s ' % begegnung.toreHeim
+                    print 'Begegnung ToreGast %s ' % begegnung.toreGast
+                    print 'UserTipp ToreHeim %s ' % userTipp.toreHeim
+                    print 'UserTipp ToreGast %s ' % userTipp.toreGast
+                    punkte += 3
+                
+                elif userTipp.begegnung == begegnung and (begegnung.toreHeim > begegnung.toreGast and userTipp.toreHeim > userTipp.toreGast) and (begegnung.toreHeim - begegnung.toreGast == userTipp.toreHeim - userTipp.toreGast):
+                    punkte += 2
+                    print 'Begegnung %s' % begegnung.pk
+                    print 'Begegnung %s' % begegnung
+                elif userTipp.begegnung == begegnung and (begegnung.toreHeim < begegnung.toreGast and userTipp.toreHeim < userTipp.toreGast) and (begegnung.toreHeim - begegnung.toreGast == userTipp.toreHeim - userTipp.toreGast):
+                    punkte += 2
+                    print 'Begegnung %s' % begegnung.pk
+                    print 'Begegnung %s' % begegnung
+                    
+                elif userTipp.begegnung == begegnung and (begegnung.toreHeim > begegnung.toreGast and userTipp.toreHeim > userTipp.toreGast) and (begegnung.toreHeim - begegnung.toreGast != userTipp.toreHeim - userTipp.toreGast):
+                    punkte += 1 
+                    print 'Begegnung %s' % begegnung.pk
+                    print 'Begegnung %s' % begegnung
+                elif userTipp.begegnung == begegnung and (begegnung.toreHeim < begegnung.toreGast and userTipp.toreHeim < userTipp.toreGast) and (begegnung.toreHeim - begegnung.toreGast != userTipp.toreHeim - userTipp.toreGast):
+                    punkte += 1
+                    print 'Begegnung %s' % begegnung.pk
+                    print 'Begegnung %s' % begegnung
+                    
+        userPunkte= (aktuellerUsername,punkte)
+        
+        
+                  
+        userPunkteListeAll.append(userPunkte)
+        userPunkteListeAll = sorted(userPunkteListeAll, key=lambda tipper: tipper[1], reverse=True)
+                
+                    
+        print 'Begegnung abgelaufen: %s ' % begegnungenAbgelaufen
+    
+    return HttpResponse('Punkte: %s' %  (userPunkteListeAll) )
