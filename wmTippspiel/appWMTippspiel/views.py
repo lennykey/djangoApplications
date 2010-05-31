@@ -1,9 +1,11 @@
 from django.http import HttpResponse, HttpResponseRedirect
-from wmTippspiel.appWMTippspiel.models import Tipps, Begegnung
+from wmTippspiel.appWMTippspiel.models import Tipps, Begegnung, Mannschaft
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response
 from django.contrib.auth.models import User
 from datetime import datetime
+import urllib
+from BeautifulSoup import BeautifulSoup
 
 
 # Create your views here.
@@ -43,7 +45,8 @@ def tippen(request):
     '''
     username = request.user.username
     userpk = request.user.pk
-    begegnungen = Begegnung.objects.all()
+    begegnungen = Begegnung.objects.all().order_by('art')
+
     tipps = [i.begegnung for i in Tipps.objects.filter(user=userpk)]
     
     
@@ -218,3 +221,57 @@ def punkteAuswerten(request):
     
     #return HttpResponse('Punkte: %s' %  (userPunkteListeAll) )
     return render_to_response('appWMTippspiel/punkte.html', {'userPunkteListeAll':userPunkteListeAll, 'username':username })
+
+def fillMannschaften(request):
+    url = 'http://de.fifa.com/worldcup/teams/index.html'
+    webpage = urllib.urlopen(url).read()
+    
+    teams = []
+    soup = BeautifulSoup(webpage)
+    teamsDiv = soup.find('div', {"class":"tTeamsClean"}).findAll('table')[0]
+    teamsTd = teamsDiv.findAll('td')
+    
+    for i in teamsTd:
+        name = i.findAll('span')[0].string
+        teams.append(name)
+
+        mannschaft = Mannschaft(name=name)
+        mannschaft.save()
+        
+    
+    return HttpResponse('%s' % teams)
+
+def fillBegegnungen(request):
+    url = 'http://de.fifa.com/worldcup/matches/index.html'
+
+    webpage = urllib.urlopen(url).read()
+    
+    games = []
+    mannschaftHeim, mannschaftGast, datum, art = "", "", "", ""
+    soup = BeautifulSoup(webpage)
+    groupsT = soup.find('div', {"class":"tGroupDetail"}).findAll('table')
+    for i in groupsT:
+        groupGames = i.findAll('tr')
+        del groupGames[0]
+        for g in groupGames:
+            mannschaftHeim = g.find('td', {"class":"l homeTeam"}).a.string
+            mannschaftHeimInstance = Mannschaft.objects.get(name=mannschaftHeim) 
+            
+            mannschaftGast = g.find('td', {"class":"r awayTeam"}).a.string
+            mannschaftGastInstance = Mannschaft.objects.get(name=mannschaftGast) 
+            
+            datum = g.find('td', {"class":"l dt"}).span.string
+            datum = "2010-"+datum[3:5]+"-"+datum[0:2]+" "+datum[6:]+":00"
+            art = i['summary']
+            
+            begegnung= Begegnung(mannschaftHeim=mannschaftHeimInstance, \
+                                 mannschaftGast=mannschaftGastInstance, \
+                                 datum=datum, \
+                                 art=art, toreHeim=0, toreGast=0)
+            begegnung.save()
+            
+            
+            games.append((mannschaftHeim, mannschaftGast, datum, art))
+    
+    return HttpResponse('%s' % games)
+
