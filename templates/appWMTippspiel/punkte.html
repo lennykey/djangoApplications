@@ -1,0 +1,16 @@
+
+<h2>Tabelle</h2>
+
+{% if userPunkteListeAll %}
+    <ul>
+        {% for user, punkte in userPunkteListeAll %}
+        {% if username == user %}
+        <li style="color: green">{{ forloop.counter }} {{ user }} {{ punkte }}</li> 
+        {% else %}
+        <li style="color: blue">{{ forloop.counter }} {{ user }} {{ punkte }}</li> 
+        {% endif %}
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Keine Tabelle abrufbar</p>
+{% endif %}

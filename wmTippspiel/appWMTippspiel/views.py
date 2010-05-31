@@ -61,13 +61,13 @@ def tippenForm(request, begegnungID):
     '''
     username = request.user.username
     userpk = request.user.pk
-    begegnung = Begegnung.objects.get(pk=begegnungID)
+    begegnung = Begegnung.objects.get(id=begegnungID)
     user = User.objects.get(pk=userpk)
     tippDatum = datetime.now()
     
     
     try:
-        tipp = Tipps.objects.get(begegnung=begegnung)
+        tipp = Tipps.objects.get(begegnung=begegnung, user=userpk)
     except:
         tipp = Tipps(user=user, begegnung=begegnung, toreHeim=0, toreGast=0,
                      tippDatum=tippDatum.strftime("%Y-%m-%d %H:%M"))
@@ -216,4 +216,5 @@ def punkteAuswerten(request):
                     
         print 'Begegnung abgelaufen: %s ' % begegnungenAbgelaufen
     
-    return HttpResponse('Punkte: %s' %  (userPunkteListeAll) )
+    #return HttpResponse('Punkte: %s' %  (userPunkteListeAll) )
+    return render_to_response('appWMTippspiel/punkte.html', {'userPunkteListeAll':userPunkteListeAll, 'username':username })
