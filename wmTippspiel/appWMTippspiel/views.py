@@ -182,7 +182,7 @@ def punkteAuswerten(request):
         
         for begegnung in begegnungenAbgelaufen:
             for userTipp in userTipps:
-                if userTipp.begegnung == begegnung and begegnung.toreHeim == userTipp.toreHeim and begegnung.toreGast == userTipp.toreHeim:
+                if userTipp.begegnung == begegnung and begegnung.toreHeim == userTipp.toreHeim and begegnung.toreGast == userTipp.toreGast:
                     print 'Begegnung %s' % begegnung.pk
                     print 'Begegnung %s' % begegnung
                     print 'Begegnung ToreHeim %s ' % begegnung.toreHeim
@@ -222,6 +222,7 @@ def punkteAuswerten(request):
     #return HttpResponse('Punkte: %s' %  (userPunkteListeAll) )
     return render_to_response('appWMTippspiel/punkte.html', {'userPunkteListeAll':userPunkteListeAll, 'username':username })
 
+
 def fillMannschaften(request):
     url = 'http://de.fifa.com/worldcup/teams/index.html'
     webpage = urllib.urlopen(url).read()
@@ -232,7 +233,7 @@ def fillMannschaften(request):
     teamsTd = teamsDiv.findAll('td')
     
     for i in teamsTd:
-        name = i.findAll('span')[0].string
+        name = str(i.findAll('span')[0].string)
         teams.append(name)
 
         mannschaft = Mannschaft(name=name)
@@ -254,15 +255,15 @@ def fillBegegnungen(request):
         groupGames = i.findAll('tr')
         del groupGames[0]
         for g in groupGames:
-            mannschaftHeim = g.find('td', {"class":"l homeTeam"}).a.string
+            mannschaftHeim = str(g.find('td', {"class":"l homeTeam"}).a.string)
             mannschaftHeimInstance = Mannschaft.objects.get(name=mannschaftHeim) 
             
-            mannschaftGast = g.find('td', {"class":"r awayTeam"}).a.string
+            mannschaftGast = str(g.find('td', {"class":"r awayTeam"}).a.string)
             mannschaftGastInstance = Mannschaft.objects.get(name=mannschaftGast) 
             
             datum = g.find('td', {"class":"l dt"}).span.string
             datum = "2010-"+datum[3:5]+"-"+datum[0:2]+" "+datum[6:]+":00"
-            art = i['summary']
+            art = str(i['summary'])
             
             begegnung= Begegnung(mannschaftHeim=mannschaftHeimInstance, \
                                  mannschaftGast=mannschaftGastInstance, \
