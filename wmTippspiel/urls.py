@@ -19,7 +19,6 @@ urlpatterns = patterns('',
     #(r'^login/$', mylogin ),
     (r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'next_page':'/'}),
     (r'^accounts/login/$', 'django.contrib.auth.views.login'),
-    # Example:
     # (r'^wmTippspiel/', include('wmTippspiel.foo.urls')),
 
     # Uncomment the admin/doc line below and add 'django.contrib.admindocs' 

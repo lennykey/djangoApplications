@@ -1,0 +1,94 @@
+!SESSION 2010-05-06 11:21:51.633 -----------------------------------------------
+eclipse.buildId=M20090917-0800
+java.version=1.6.0_15
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=linux, ARCH=x86, WS=gtk, NL=de_DE
+Command-line arguments:  -os linux -ws gtk -arch x86
+
+!ENTRY org.eclipse.jface 2 0 2010-05-06 11:22:45.304
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2010-05-06 11:22:45.304
+!MESSAGE A conflict occurred for CTRL+SHIFT+T:
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(com.python.pydev.analysis.actions.pyGlobalsBrowserWorkbench,Python Show Class Browser,
+		Show Class Browser,
+		Category(org.python.pydev.ui.category.source,Pydev - Editor,Pydev editor category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+!SESSION 2010-05-06 11:32:56.848 -----------------------------------------------
+eclipse.buildId=M20090917-0800
+java.version=1.6.0_15
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=linux, ARCH=x86, WS=gtk, NL=de_DE
+Command-line arguments:  -os linux -ws gtk -arch x86 -data /home/jupiter/djAngoapplications/test2
+
+!ENTRY org.eclipse.ui 4 4 2010-05-06 11:33:00.975
+!MESSAGE Could not create view: 'org.eclipse.ui.internal.introview'.
+
+!ENTRY org.eclipse.jface 2 0 2010-05-06 11:33:05.761
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2010-05-06 11:33:05.761
+!MESSAGE A conflict occurred for CTRL+SHIFT+T:
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(com.python.pydev.analysis.actions.pyGlobalsBrowserWorkbench,Python Show Class Browser,
+		Show Class Browser,
+		Category(org.python.pydev.ui.category.source,Pydev - Editor,Pydev editor category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.eclipse.ui 4 0 2010-05-06 11:33:06.239
+!MESSAGE Problems occurred restoring workbench.
+!SUBENTRY 1 org.eclipse.ui 0 0 2010-05-06 11:33:06.240
+!MESSAGE 
+!SUBENTRY 1 org.eclipse.core.runtime 0 0 2010-05-06 11:33:06.240
+!MESSAGE OK
+!SUBENTRY 1 org.eclipse.core.runtime 0 0 2010-05-06 11:33:06.240
+!MESSAGE OK
+!SUBENTRY 1 org.eclipse.core.runtime 0 0 2010-05-06 11:33:06.240
+!MESSAGE OK
+!SUBENTRY 1 org.eclipse.ui 4 0 2010-05-06 11:33:06.240
+!MESSAGE Unable to restore perspective: Workspace - Java.
+!SUBENTRY 2 org.eclipse.ui 0 0 2010-05-06 11:33:06.240
+!MESSAGE Problems occurred restoring perspective.
+!SUBENTRY 3 org.eclipse.ui 0 0 2010-05-06 11:33:06.240
+!MESSAGE 
+!SUBENTRY 2 org.eclipse.ui 0 0 2010-05-06 11:33:06.241
+!MESSAGE 
+!SUBENTRY 2 org.eclipse.ui 0 0 2010-05-06 11:33:06.241
+!MESSAGE 
+!SUBENTRY 2 org.eclipse.ui 0 0 2010-05-06 11:33:06.241
+!MESSAGE 
+!SUBENTRY 2 org.eclipse.ui 0 0 2010-05-06 11:33:06.241
+!MESSAGE 
+!SUBENTRY 2 org.eclipse.ui 0 0 2010-05-06 11:33:06.241
+!MESSAGE 
+!SUBENTRY 2 org.eclipse.ui 0 0 2010-05-06 11:33:06.241
+!MESSAGE 
+!SUBENTRY 2 org.eclipse.ui 0 0 2010-05-06 11:33:06.241
+!MESSAGE 
+!SUBENTRY 2 org.eclipse.ui 0 0 2010-05-06 11:33:06.241
+!MESSAGE 
+!SUBENTRY 2 org.eclipse.ui 4 0 2010-05-06 11:33:06.242
+!MESSAGE Could not find view: org.eclipse.ui.internal.introview
+!SUBENTRY 1 org.eclipse.core.runtime 0 0 2010-05-06 11:33:06.242
+!MESSAGE OK
