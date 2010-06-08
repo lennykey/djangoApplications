@@ -32,7 +32,7 @@ def regist(request):
         user.save()
         user2 = authenticate(username=request.POST['username'], password=request.POST['password'])
         login(request, user2)
-        return direct_to_template(request, 'profil.html')
+        return direct_to_template(request, 'appWMTippspiel/start.html')
         #return redirect_to('/accounts/profile/', False)
     else:
         return HttpResponseRedirect('Kein Erfolg')
