@@ -3,31 +3,16 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from urllib2 import HTTPRedirectHandler
 from django.contrib.auth.decorators import login_required
+from django.views.generic.simple import direct_to_template, redirect_to
+
+from django.shortcuts import render_to_response, get_object_or_404
 
 import datetime
 
 
 
 def index(request):
-    '''
-     Log in the raw way! Besser decorator fuer das LogIn verwenden
-     @login_required(redirect_field_name='next') 
-    '''
-    #if request.user.is_authenticated():
-    #    return HttpResponse('Is Authenticated <a href="logout/">Logout</a>') 
-    #  
-    #else:
-    #    return HttpResponse('''
-    #        Login:
-    #        
-    #        <form method="POST" action="login/">
-    #        <input type="text" name="username"></input>
-    #        <input type="text" name="password"></input>
-    #        <input type="submit" value="Submit"></input>
-    #        </form>
-    #    
-    #    ''')
-    
+
     return HttpResponse('''<h1>Welcome to our super WM Tippspiel</h1>
     <div><a href="displaymeta/">Display Meta Information</a></div>
     <div><a href="time/">What time ist it?</a></div>
@@ -37,58 +22,30 @@ def index(request):
     <!-- <div><a href="tippspiel/tipps/">Tipps</a></div> -->
     <div><a href="tippspiel/usertipps/">Meine Tipps</a></div>
     <div><a href="tippspiel/tippen/">Jetzt tippen</a></div>
-    <div><a href="tippspiel/punkte/">Punkte</a></div>
-    
     ''')
     
-    #assert False
-    
 
-def mylogin(request):
+
+def regist(request):
     if request.method == 'POST':
-        user = authenticate(username=request.POST['username'], password=request.POST['password'])
-        if user is not None:
-          if user.is_active:
-            login(request, user)
-            # success
-            return HttpResponse('Login geschafft <a href="/">Home</a>')
-          else:
-            # disabled account
-            return direct_to_template(request, 'inactive_account.html')
-        else:
-          # invalid login
-          return HttpResponse('Invalid Login') 
+        user = User.objects.create_user(request.POST['username'], request.POST['email'], request.POST['password'])
+        user.save()
+        user2 = authenticate(username=request.POST['username'], password=request.POST['password'])
+        login(request, user2)
+        return direct_to_template(request, 'profil.html')
+        #return redirect_to('/accounts/profile/', False)
     else:
-          return HttpResponse('Kein Post') 
-  
-def mylogout(request):
-    if request.user.is_authenticated():
-        logout(request)
-    
-    return HttpResponseRedirect('/')
+        return HttpResponseRedirect('Kein Erfolg')
+
 
 
 @login_required(redirect_field_name='next')
-def current_datetime(request):
-    '''
-    Diese Methode ist nur fuer Logged-In User sichtbar. Der standard Redirect
-    Name der Variable in der Url ist "next". wenn es gewuenscht wird, kann dies
-    im @login_required(redirect_field_name='next') Decorator geandert werden. 
-    Beispiel:
-        @login_required(redirect_field_name='weiterleitenZu')
-        
-        Wenn die Variable "next" heissen soll, dann kann auch nur
-        "@login_required" mit oder ohne Klammern vor der zu schuetzenden View
-        gesetzt werden.
-    '''
-    
-    now = datetime.datetime.now()
-    
+def profil(request):
+    # User-Daten beschaffen
     myUser = request.user
-    
-    html = "<html><body>It is now %s. Username: %s</body></html>" % (now, myUser.username)
-    
-    return HttpResponse(html)
+
+    # Template aufrufen
+    return render_to_response('profil.html', {'user':myUser})
 
 
 def display_meta(request):
@@ -98,7 +55,5 @@ def display_meta(request):
     for k, v in values:
         html.append('<tr><td>%s</td><td>%s</td></tr>' % (k, v))
     return HttpResponse('<table>%s</table>' % '\n'.join(html))
-
-
 
 

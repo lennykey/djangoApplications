@@ -1,5 +1,7 @@
+{% extends "appWMTippspiel/base.html" %}
+{% block title %}Alle Begegnungen{% endblock %}
 
-
+{% block content %}
 <h2>Moegliche Tipps fuer {{username}}</h2>
 
 {% if begegnungen %}
@@ -19,3 +21,5 @@
 {% else %}
     <p>No Begegnung matched your search criteria.</p>
 {% endif %}
+
+{% endblock %}

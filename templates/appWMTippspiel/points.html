@@ -1,0 +1,30 @@
+{% extends "appWMTippspiel/base.html" %}
+{% block title %}Points{% endblock %}
+
+{% block content %}
+
+ <div id="content">
+        <div class="cbox">
+        <h2>Highscore</h2>
+        <table>
+        <tr
+        <th>Platz</th>
+        <th>Spieler</th>
+        <th>Punkte</th>
+        </tr> 
+        {% for user, punkte in punkteListe %}
+        <tr>
+                
+                <td style="width:300px; text-align: center"><a href="#">{{forloop.counter}}</a></td>
+                <td style="width:300px; text-align: center"><a href="#">{{ user }}</a></td>
+                <td style="width:100px; text-align: center"><b>{{ punkte }}</b></td>
+        </tr>
+        
+        {% endfor %}
+         </table>
+        </div>
+        
+        <div style="clear:both"></div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "appWMTippspiel/base.html" %}
+{% block title %}Start{% endblock %}
+
+{% block content %}
+
+ <div id="content">
+        <div class="cboxl">
+        <h2>FIFA.com News</h2>
+        {% if entries %}
+        {% for feed in entries %}
+        <div class="feed"> <a href="{{ feed.link }}"><span class="feedtitle">{{ feed.title }}</span> </a> <div>{{feed.description|striptags}}</div></div>
+        {% endfor %}
+
+        {% else %}
+        <p>No Feed available</p>
+        {% endif %}
+        </div>
+        
+        <div class="cbox">
+        <h2>Highscore</h2>
+        <table>
+        
+        {% for user, punkte in punkteListe %}
+        <tr>
+                <td style="width:200px"><a href="#">{{ user }}</a></td>
+                <td style="width:100px"><b>{{ punkte }}</b></td>
+        </tr>
+        
+        {% endfor %}
+         </table>
+        </div>
+        
+        <div style="clear:both"></div>
+    </div>
+
+{% endblock %}

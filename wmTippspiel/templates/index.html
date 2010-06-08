@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>WM - Tippspiel</title>
+<link rel="stylesheet" type="text/css" href="/site_media/css/main.css"/>
+</head>
+
+<body>
+
+<div id="main">
+	<div id="aheader"></div>
+
+	<div id="header">
+    
+    	<div id="hbanner"></div>
+    	<div id="hgreeting">
+    	<h2 class="con">Noch keinen Account?</h2>
+        <form action="/regist/" method="post">
+        <table>
+        	<tr>
+            	<td style="width:125px">Username: </td>
+                <td style="width:225px"><input type="text" name="username" size="25" /></td>
+            <tr>
+            <tr>
+            	<td>Passwort: </td>
+                <td><input type="password" name="password" size="25" /></td>
+            <tr>
+            <tr>
+            	<td>Deine E-mail: </td>
+                <td><input type="text" name="email" size="25" /></td>
+            <tr>
+            <tr>
+            	<td>&nbsp;</td>
+                <td><input class="registbutton" type="submit" name="regist" value="Registrieren" /></td>
+            <tr>
+        </table>
+        </form>
+        </div>
+        
+    	<div id="hlogin">
+        <h2 class="con">Auf zum Tippen...</h2>
+        {% block content %}
+
+        <form method="post" action="{% url django.contrib.auth.views.login %}">{% csrf_token %}
+        	<div class="hlbox">Username: <br />{{ form.username }}</div>
+            <div class="hlbox">Passwort: <br />{{ form.password }}</div>
+            <div class="hlbox">&nbsp;<br /><input class="loginbutton" type="submit" name="login" value="Login" />
+            <input type="hidden" name="next" value="{{ next }}" />
+            </div>
+            <div class="hclear">
+            {% if form.errors %}
+            Your username and password didn't match. Please try again.
+            {% endif %}
+	    <br /><br /><a href="#">Passwort vergessen?</a>
+            </div>
+        </form>
+
+	{% endblock %}
+        </div>
+        
+        <div style="clear:both"></div>
+    </div>
+    
+    <div id="content">
+    	<div class="cbox">
+        <h2>Neuigkeiten</h2>
+        <ul>
+        	<li>WM-Tippspiel beginnt...</li>
+            <li>Seite online...</li>
+        </ul>
+        </div>
+        
+        <div class="cbox">
+        <h2>Neuigkeiten</h2>
+        <ul>
+        	<li>WM-Tippspiel beginnt...</li>
+            <li>Seite online...</li>
+        </ul>
+        </div>
+        
+        <div class="cbox">
+        <h2>Highscore</h2>
+        <table>
+        	<tr>
+            	<td style="width:200px"><a href="#">Spieler XY</a></td>
+                <td style="width:100px">1234 <b>Punkte</b></td>
+            </tr>
+            <tr>
+            	<td><a href="#">Spieler XY</a></td>
+                <td>1234 <b>Punkte</b></td>
+            </tr>
+            <tr>
+            	<td><a href="#">Spieler XY</a></td>
+                <td>1234 <b>Punkte</b></td>
+            </tr>
+            <tr>
+            	<td><a href="#">Spieler XY</a></td>
+                <td>1234 <b>Punkte</b></td>
+            </tr>
+            <tr>
+            	<td><a href="#">Spieler XY</a></td>
+                <td>1234 <b>Punkte</b></td>
+            </tr>
+        </table>
+        </div>
+        
+        <div style="clear:both"></div>
+    </div>
+    
+    <div id="footer">
+    <p><a href="#">Impressum</a> | <a href="#">Internetprogrammierung</a> | <a href="#">Facebook</a> | <a href="#">usw.</a></p>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+h2.cont {
+	border-bottom:				1px solid #DCDCDC;
+	font-family:				Verdana, Geneva, sans-serif;
+	font-size:					16px;
+}
+
+
+#cprofil {
+	float:						left;	
+	width:						455px;	
+}
+
+
+#cmybets {
+	float:						left;
+	margin-left:				25px;
+	width:						380px;
+	
+}
+
+table.tbet {
+	
+}
+
+table.tbet tr td {
+	border-bottom:				1px solid #DCDCDC;
+	cursor: 					pointer; /* hand-shaped cursor */
+  	cursor: 					hand; /* for IE 5.x */
+}
+
+#hpwsend {
+	background-color:			#E2FFC0;
+	border-color:				#3C6;
+	border-style:				solid;
+	border-width:				1px;
+	height:						250px;
+	padding:			 	    5px;
+	text-align:					left;
+	width:						868px;
+}
+.sendbutton {
+	width: 						77px;
+	height: 					20px;
+  	margin: 					0;
+  	padding: 		 			0;
+  	border: 					0;
+  	background: 				transparent url("../images/buttons/senden.jpg") no-repeat center top;
+  	text-indent: 				-1000em;
+  	cursor: 					pointer; /* hand-shaped cursor */
+  	cursor: 					hand; /* for IE 5.x */
+}
+.sendbutton:hover {
+  	background: 				transparent url("../images/buttons/senden_h.jpg") no-repeat center top;
+}

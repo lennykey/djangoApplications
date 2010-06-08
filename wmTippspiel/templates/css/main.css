@@ -1,0 +1,241 @@
+@charset "utf-8";
+/* CSS Document */
+
+html {
+	height:						100% /* wichtig */
+}
+
+body {
+	background-color:			#9dbae6;
+	background-image:			url("../images/background.jpg");
+	background-position:		center -15px;
+	background-repeat:			no-repeat;
+	color:						#595959;
+	font-family:				Verdana, Geneva, sans-serif;
+	font-size:					12px;
+	height: 					100%; /* wichtig */
+}
+
+
+#main {
+	/*background-color:			#000;*/
+	height:						auto !important; /* moderne Browser */
+	height:						100%; /* IE */
+	/*margin-left:				300px;*/
+	margin:						auto;
+	/*margin-top:				125px;*/
+	min-height: 				100%;
+	position: 					relative;
+	
+	width:						880px;
+}
+
+a {
+	color:						#39C;
+	font-family:				Verdana, Geneva, sans-serif;
+	font-size:					12px;
+	text-decoration:			none;
+}
+
+h2.con {
+	border-bottom:				1px solid #000;
+	font-family:				Verdana, Geneva, sans-serif;
+	font-size:					15px;
+}
+
+#aheader {
+	height:						120px;
+	width:						880px;
+}
+
+#header {
+	/*background-color:			#F00;*/
+	margin-bottom:				15px;
+}
+#hbanner {
+	background-image:			url("../images/banner.jpg");
+	height:						130px;
+	width:						880px;
+}
+
+#hgreeting {
+	background-color:			#FF9;
+	border-color:				#CC0;
+	border-style:				solid;
+	border-width:				1px;
+	float:						left;
+	height:						150px;
+	padding:			 	    5px;
+	text-align:					left;
+	width:						435px;
+}
+
+#hgreeting table {
+	margin-left:				15px;
+	text-align:					right;
+}
+#hgreeting input {
+	background-color:			#EEE;
+	border-color:				#000;
+	border-style:				solid;
+	border-width:				1px;
+}
+.registbutton {
+	width: 						114px;
+	height: 					20px;
+  	margin: 					0;
+  	padding: 					0;
+  	border: 					0;
+  	background: 				transparent url("../images/buttons/regist.jpg") no-repeat center top;
+  	text-indent: 				-1000em;
+  	cursor: 					pointer; /* hand-shaped cursor */
+  	cursor: 					hand; /* for IE 5.x */
+}
+.registbutton:hover {
+	background: 				transparent url("../images/buttons/regist_h.jpg") no-repeat center top;
+}
+
+#hlogin {
+	background-color:			#E2FFC0;
+	border-color:				#3C6;
+	border-style:				solid;
+	border-width:				1px;
+	float:						right;
+	height:						150px;
+	padding:			 	    5px;
+/*	text-align:					left;*/
+	width:						420px;
+}
+
+div.hlbox {
+	float:						left;
+	margin-left:				5px;
+}
+div.hclear {
+	clear:						both;
+	margin-right:				45px;
+	/*text-align:					right;*/
+}
+#hlogin input {
+	background-color:			#EEE;
+	border-color:				#000;
+	border-style:				solid;
+	border-width:				1px;
+	margin-top:					10px;
+}
+.loginbutton {
+	width: 						92px;
+	height: 					20px;
+  	margin: 					0;
+  	padding: 		 			0;
+  	border: 					0;
+  	background: 				transparent url("../images/buttons/login.jpg") no-repeat center top;
+  	text-indent: 				-1000em;
+  	cursor: 					pointer; /* hand-shaped cursor */
+  	cursor: 					hand; /* for IE 5.x */
+}
+.loginbutton:hover {
+  	background: 				transparent url("../images/buttons/login_h.jpg") no-repeat center top;
+}
+
+
+#navigation {
+	margin:						0;
+	padding:					0;
+	width:						880px;	
+}
+#navigation ul {
+	list-style:					none;
+	margin:						0;
+	padding:					0;
+}
+#navigation ul li {
+	background-image:			url("../images/navigation.jpg");
+	float:						left;
+	height:						30px;
+	text-align:					center;
+	width:						176px;
+}
+#navigation ul li a {
+	color:						#FFF;
+	display:					block;
+	height:						30px;
+	padding-top:				5.5px;
+	text-decoration:			none;
+	width:						176px;
+}
+
+#content {
+	background-color:			white;
+	/*border-bottom:			1px solid #DCDCDC;*/
+	padding-bottom:             10em;
+	padding-left:               10px;
+	padding-right:              10px;
+}
+div.cbox {
+	/*background-color:			#CCC;*/
+	float:						left;
+	margin:						5px;
+	width:						275px;
+}
+
+.cboxl {
+	/*background-color:			#CCC;*/
+	float:						left;
+	margin:						5px;
+	width:						40em;
+}
+.cbox h2 {
+	border-bottom:				1px solid #DCDCDC;
+	font-family:				Verdana, Geneva, sans-serif;
+	font-size:					16px;
+}
+
+
+#footer {
+	/*background-color:			#FF3;*/
+	border-top:					1px solid #DCDCDC;
+	bottom:						0;
+	margin-top:					10px;
+	position:					absolute;
+	width:						880px;
+}
+
+#footer p {
+	text-align:					center;
+}
+
+.feed{
+margin-top: 0px;
+margin-bottom: 10px;
+/*
+border-color: black;
+border-width: 1px;	  
+border-style: solid;
+*/	  
+}
+
+.feedtitle{
+font-weight: bold;		   
+}
+
+.falsepasswd{
+position: relative;
+left: 20 px;
+top: 20 px;
+}
+
+
+#loginbutton{
+background-color: red;
+position: relative;
+top: 5px;
+left: 327px;
+}
+
+#falseloginmessage{
+position: relative;
+text-align: center;
+font-weight: bold;
+font-size: 16pt;
+}

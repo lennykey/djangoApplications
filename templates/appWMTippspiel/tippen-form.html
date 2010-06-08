@@ -1,3 +1,8 @@
+{% extends "appWMTippspiel/base.html" %}
+{% block title %}Tippformular{% endblock %}
+
+{% block content %}
+
 {% ifequal request.method 'GET' %}
 <h1>Mein Tipp</h1>
 <form method="POST" action="tippausfuehren">
@@ -14,4 +19,6 @@
 {% else %}
 request.method
 
-{% endifequal %} 
+{% endifequal %}
+
+{% endblock %}

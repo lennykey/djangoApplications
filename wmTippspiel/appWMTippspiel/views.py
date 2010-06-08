@@ -1,14 +1,26 @@
 from django.http import HttpResponse, HttpResponseRedirect
-from wmTippspiel.appWMTippspiel.models import Tipps, Begegnung, Mannschaft
+from wmTippspiel.appWMTippspiel.models import Tipps, Begegnung
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response
 from django.contrib.auth.models import User
 from datetime import datetime
-import urllib
-from BeautifulSoup import BeautifulSoup
+#from wmTippspiel.feedReader.views import feedStart 
+import wmTippspiel
 
 
 # Create your views here.
+@login_required
+def start(request):
+    ''' 
+    This view shows the startpage
+    '''
+    feed = wmTippspiel.feedReader.views.feedStart(request)
+    punkteListe = punkteAuswerten(request)
+    
+    return render_to_response('appWMTippspiel/start.html',
+                              {'entries': feed.entries[0:11], 'punkteListe': punkteListe[0:16] })
+
+
 @login_required
 def userTipps(request):
     ''' 
@@ -45,8 +57,7 @@ def tippen(request):
     '''
     username = request.user.username
     userpk = request.user.pk
-    begegnungen = Begegnung.objects.all().order_by('art')
-
+    begegnungen = Begegnung.objects.all()
     tipps = [i.begegnung for i in Tipps.objects.filter(user=userpk)]
     
     
@@ -64,7 +75,7 @@ def tippenForm(request, begegnungID):
     '''
     username = request.user.username
     userpk = request.user.pk
-    begegnung = Begegnung.objects.get(id=begegnungID)
+    begegnung = Begegnung.objects.get(pk=begegnungID)
     user = User.objects.get(pk=userpk)
     tippDatum = datetime.now()
     
@@ -125,8 +136,10 @@ def tippAusfuehren(request):
         changeTipp.tippDatum = tippDatum 
         
         changeTipp.save()
-        
-        return HttpResponse('Spiel wurde veraendert')
+        return render_to_response('appWMTippspiel/tippenausfuehrenveraendert.html',
+                              {'begegnung': begegnung, 'toreHeim':toreHeim,
+                                'toreGast':toreGast, 'user': user})
+        #return HttpResponse('Spiel wurde veraendert')
     
     elif str(tipp) not in userTipps and (jetztDatumVergleich <= begegnungDatumVergleich):
         tipp.save()
@@ -148,17 +161,21 @@ def tippAusfuehren(request):
     print toreGast
     print tippDatum 
     
+    return render_to_response('appWMTippspiel/tippenausfuehrenerfolgreich.html',
+                              {'begegnung': begegnung, 'toreHeim':toreHeim,
+                                'toreGast':toreGast, 'user': user})
     
-    return HttpResponse('Folgender Tipp wurde ausgefuehrt %s Tore: %s : %s vom User: %s' % (begegnung, toreHeim, toreGast, user) )    
+    #return HttpResponse('Folgender Tipp wurde ausgefuehrt %s Tore: %s : %s vom User: %s' % (begegnung, toreHeim, toreGast, user) )    
     
-@login_required
+
+
 def punkteAuswerten(request):
     
-    userpk = request.user.pk
-    username = request.user.username
+    #userpk = request.user.pk
+    #username = request.user.username
     
     
-    print userpk
+    #print userpk
     
     now = datetime.strptime(datetime.now().isoformat()[0:16],
                                                  "%Y-%m-%dT%H:%M" )
@@ -174,11 +191,11 @@ def punkteAuswerten(request):
         punkte = 0
         
         aktuellerUsername = aktuellerUser.username
-        aktuellerUserpk = aktuellerUser.pk 
+        aktuellerUserpk = aktuellerUser.pk
         
         userTipps = Tipps.objects.filter(user=aktuellerUserpk)
-        print 'Usertipps  %s ' % userTipps
-        print 'aktuellerUsername: %s' % aktuellerUsername 
+        print 'Usertipps %s ' % userTipps
+        print 'aktuellerUsername: %s' % aktuellerUsername
         
         for begegnung in begegnungenAbgelaufen:
             for userTipp in userTipps:
@@ -201,7 +218,7 @@ def punkteAuswerten(request):
                     print 'Begegnung %s' % begegnung
                     
                 elif userTipp.begegnung == begegnung and (begegnung.toreHeim > begegnung.toreGast and userTipp.toreHeim > userTipp.toreGast) and (begegnung.toreHeim - begegnung.toreGast != userTipp.toreHeim - userTipp.toreGast):
-                    punkte += 1 
+                    punkte += 1
                     print 'Begegnung %s' % begegnung.pk
                     print 'Begegnung %s' % begegnung
                 elif userTipp.begegnung == begegnung and (begegnung.toreHeim < begegnung.toreGast and userTipp.toreHeim < userTipp.toreGast) and (begegnung.toreHeim - begegnung.toreGast != userTipp.toreHeim - userTipp.toreGast):
@@ -219,8 +236,11 @@ def punkteAuswerten(request):
                     
         print 'Begegnung abgelaufen: %s ' % begegnungenAbgelaufen
     
-    #return HttpResponse('Punkte: %s' %  (userPunkteListeAll) )
-    return render_to_response('appWMTippspiel/punkte.html', {'userPunkteListeAll':userPunkteListeAll, 'username':username })
+    #return HttpResponse('Punkte: %s' % (userPunkteListeAll) )
+    #return render_to_response('appWMTippspiel/punkte.html', {'userPunkteListeAll':userPunkteListeAll, 'username':username })
+    return userPunkteListeAll
+
+
 
 
 def fillMannschaften(request):
@@ -256,10 +276,10 @@ def fillBegegnungen(request):
         del groupGames[0]
         for g in groupGames:
             mannschaftHeim = str(g.find('td', {"class":"l homeTeam"}).a.string)
-            mannschaftHeimInstance = Mannschaft.objects.get(name=mannschaftHeim) 
+            mannschaftHeimInstance = Mannschaft.objects.get(name=mannschaftHeim)
             
             mannschaftGast = str(g.find('td', {"class":"r awayTeam"}).a.string)
-            mannschaftGastInstance = Mannschaft.objects.get(name=mannschaftGast) 
+            mannschaftGastInstance = Mannschaft.objects.get(name=mannschaftGast)
             
             datum = g.find('td', {"class":"l dt"}).span.string
             datum = "2010-"+datum[3:5]+"-"+datum[0:2]+" "+datum[6:]+":00"
@@ -276,3 +296,15 @@ def fillBegegnungen(request):
     
     return HttpResponse('%s' % games)
 
+def points(request):
+    
+    punkteListe = punkteAuswerten(request)
+    
+    return render_to_response('appWMTippspiel/points.html',
+                              {'punkteListe': punkteListe[0:16] })
+    
+    
+    
+
+
+    
