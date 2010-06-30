@@ -6,10 +6,12 @@
 
 <link rel="stylesheet" type="text/css" href="/site_media/css/main.css" />
 <link rel="stylesheet" type="text/css" href="/site_media/css/content.css" />
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="/site_media/js/wmtippspiel.js"></script> 
 </head>
 
 <body>
-
+{% block body %}
 <div id="main">
 	<div id="aheader"></div>
 
@@ -18,12 +20,11 @@
     	<div id="hbanner"></div>
     	<div id="navigation">
         	<ul>
-            	<li><a href="/tippspiel/start/">Startseite</a></li>
-            	<li><a href="/tippspiel/tippen/">Begegnungen</a></li>
-                <li><a href="/tippspiel/usertipps/">Meine Tipps</a></li>
-                <li><a href="/tippspiel/points/">Highscore</a></li>
-                
-                <li><a href="/accounts/logout/"><b>Abmelden</b></a></li>
+            	<li><a href="/wmtippspiel/tippspiel/start/">Startseite</a></li>
+            	<li><a href="/wmtippspiel/tippspiel/tippen/">Tippen</a></li>
+                <li><a href="/wmtippspiel/profil/">Vergleich</a></li>
+				<li><a href="#"></a></li>
+                <li><a href="/wmtippspiel/accounts/logout/"><b>Abmelden</b></a></li>
             </ul>
         </div>
         
@@ -50,28 +51,28 @@
                 <td style="width:50px"><b>Erg.</b></td>
                 <td style="width:50px"><b>Tipp</b></td>
             </tr>
-            <tr onclick="window.location.href='#';" onmouseout="this.style.backgroundColor='#FFFFFF'" onmouseover="this.style.backgroundColor='#D7D7D7'; this.style.cursor='hand';" style="clear: both; overflow: hidden; background-color: rgb(255, 255, 255);">
+            <tr onclick="window.location.href='#' onmouseout="this.style.backgroundColor='#FFFFFF'" onmouseover="this.style.backgroundColor='#D7D7D7'; this.style.cursor='hand';" style="clear: both; overflow: hidden; background-color: rgb(255, 255, 255);">
             	<td>Deutschland</td>
                 <td>vs.</td>
                 <td>Ghana</td>
                 <td>1:0</td>
                 <td>2:0</td>
             </tr>
-            <tr onclick="window.location.href='#';" onmouseout="this.style.backgroundColor='#FFFFFF'" onmouseover="this.style.backgroundColor='#D7D7D7'; this.style.cursor='hand';" style="clear: both; overflow: hidden; background-color: rgb(255, 255, 255);">
+            <tr onclick="window.location.href='#' onmouseout="this.style.backgroundColor='#FFFFFF'" onmouseover="this.style.backgroundColor='#D7D7D7'; this.style.cursor='hand';" style="clear: both; overflow: hidden; background-color: rgb(255, 255, 255);">
             	<td>Deutschland</td>
                 <td>vs.</td>
                 <td>Ghana</td>
                 <td>1:0</td>
                 <td>2:0</td>
             </tr>
-            <tr onclick="window.location.href='#';" onmouseout="this.style.backgroundColor='#FFFFFF'" onmouseover="this.style.backgroundColor='#D7D7D7'; this.style.cursor='hand';" style="clear: both; overflow: hidden; background-color: rgb(255, 255, 255);">
+            <tr onclick="window.location.href='#' onmouseout="this.style.backgroundColor='#FFFFFF'" onmouseover="this.style.backgroundColor='#D7D7D7'; this.style.cursor='hand';" style="clear: both; overflow: hidden; background-color: rgb(255, 255, 255);">
             	<td>Deutschland</td>
                 <td>vs.</td>
                 <td>Ghana</td>
                 <td>1:0</td>
                 <td>2:0</td>
             </tr>
-            <tr onclick="window.location.href='#';" onmouseout="this.style.backgroundColor='#FFFFFF'" onmouseover="this.style.backgroundColor='#D7D7D7'; this.style.cursor='hand';" style="clear: both; overflow: hidden; background-color: rgb(255, 255, 255);">
+            <tr onclick="window.location.href='#' onmouseout="this.style.backgroundColor='#FFFFFF'" onmouseover="this.style.backgroundColor='#D7D7D7'; this.style.cursor='hand';" style="clear: both; overflow: hidden; background-color: rgb(255, 255, 255);">
             	<td>Deutschland</td>
                 <td>vs.</td>
                 <td>Ghana</td>
@@ -85,9 +86,9 @@
     </div>
    {% endblock %} 
     <div id="footer">
-    <p><a href="#">Impressum</a> | <a href="#">Internetprogrammierung</a> | <a href="#">Facebook</a> | <a href="#">usw.</a></p>
+    <p><a href="#">Impressum</a> | <a href="http://python.cy55.de/">Internetprogrammierung mit Python</a> | <a href="http://www.facebook.com/group.php?gid=126218304077906&v=wall&ref=ts">Facebook</a> </p>
     </div>
 </div>
-
+{% endblock %} 
 </body>
 </html>

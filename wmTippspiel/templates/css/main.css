@@ -6,7 +6,7 @@ html {
 }
 
 body {
-	background-color:			#9dbae6;
+	background-color:			#FFF;
 	background-image:			url("../images/background.jpg");
 	background-position:		center -15px;
 	background-repeat:			no-repeat;
@@ -44,7 +44,7 @@ h2.con {
 }
 
 #aheader {
-	height:						120px;
+	height:						105px;
 	width:						880px;
 }
 
@@ -53,7 +53,7 @@ h2.con {
 	margin-bottom:				15px;
 }
 #hbanner {
-	background-image:			url("../images/banner.jpg");
+	background-image:			url("../images/banner2.jpg");
 	height:						130px;
 	width:						880px;
 }
@@ -67,11 +67,11 @@ h2.con {
 	height:						150px;
 	padding:			 	    5px;
 	text-align:					left;
-	width:						435px;
+	width:						430px;
 }
 
 #hgreeting table {
-	margin-left:				15px;
+	margin-left:				5px;
 	text-align:					right;
 }
 #hgreeting input {
@@ -104,7 +104,7 @@ h2.con {
 	height:						150px;
 	padding:			 	    5px;
 /*	text-align:					left;*/
-	width:						420px;
+	width:						425px;
 }
 
 div.hlbox {
@@ -114,7 +114,7 @@ div.hlbox {
 div.hclear {
 	clear:						both;
 	margin-right:				45px;
-	/*text-align:					right;*/
+	text-align:					right;
 }
 #hlogin input {
 	background-color:			#EEE;
@@ -150,7 +150,7 @@ div.hclear {
 	padding:					0;
 }
 #navigation ul li {
-	background-image:			url("../images/navigation.jpg");
+	background-image:			url("../images/navigation2.jpg");
 	float:						left;
 	height:						30px;
 	text-align:					center;
@@ -208,6 +208,9 @@ div.cbox {
 .feed{
 margin-top: 0px;
 margin-bottom: 10px;
+padding-bottom: 10px;
+border-bottom-style: solid;
+border-color:#FEFFBF;
 /*
 border-color: black;
 border-width: 1px;	  
@@ -238,4 +241,207 @@ position: relative;
 text-align: center;
 font-weight: bold;
 font-size: 16pt;
+}
+
+
+#tippaendern{
+color: #BDBF00;
+
+}
+
+
+.feedimage{
+float:left
+}
+
+.feedtext{
+float:left;
+width: 300px;
+margin-left: 20px
+}
+
+.feeddate{
+margin-top: 5px;
+color: #87CEFA;
+}
+
+#gruppen{
+position: absolute;
+top: 320px;
+left: 44px;	
+background-color: white;
+height: auto;
+width: 65px;
+border-style: solid;
+padding: 5px;
+
+	
+}
+
+
+#spielregeln{
+width: 330px;
+margin-top: 10px;	
+	
+}
+
+#spielregelnhead{
+height: 35px;
+font-weight: bold;
+font-size: 12pt;	
+padding-top: 3px;
+padding-bottom: 3px;
+/*border-style: solid;*/
+/*text-decoration: underline;*/
+	
+}
+
+#spielregelncontent{
+position:relative;
+/*
+left: 505px;
+top:440px;
+*/
+border-style: solid;
+padding: 5px;	
+background-color: #E2FFC0;
+	
+}
+
+#spielregelnheadup{
+	
+}
+
+#spielregelnheaddown{
+    
+}
+
+#spielregelnfooter{
+
+}
+
+#spielregelnfooterimage{
+
+}
+
+
+#tipps{
+float: left;	
+width: 550px;
+}
+
+
+#nochzutippen{
+float: left;
+margin-left: 5px;
+width: 280px;
+	
+}
+
+
+
+
+
+.tippaendern{
+color: blue;
+cursor: pointer;
+}
+
+.tippen{
+color: blue;
+cursor: pointer; 
+	
+}
+
+
+.tippzeilespaltedatum{
+text-align: center;
+witdh: 90px;
+}
+
+.tippzeilespalteheim{
+text-align: center;
+width: 115px;
+
+}
+
+.tippzeilespaltegast{
+text-align: center;
+width: 115px;
+
+}
+
+.tippzeilespaltegruppe{
+text-align: center;
+width: 45px;
+
+}
+
+
+.tippzeilespalteeintragheim{
+text-align: right;
+}
+
+.tippzeilespalteeintraggast{
+text-align: left;
+}
+
+#tippsofbegegnung{
+position: fixed;
+top: 39%;
+left: 30%;
+border-style: solid;
+background-color: #E2FFC0;
+width: 200px;
+height: auto;
+z-index:2;
+
+	
+}
+
+#tippsofbegegnunghead{
+font-weight: bold;
+text-decoration: underline;
+	
+}
+
+#usertippsclose{
+text-decoration: underline;
+font-weight: bold;	
+}
+
+#tippformframe{
+position: fixed;
+top: 40%;
+left: 10%;
+background-color: #8FABFF;
+border-top-style: solid;	
+border-left-style: solid;    
+border-right-style: solid;    
+	
+}
+
+#tippform{
+
+background-color: white;
+border-top-style: solid;    
+border-bottom-style: solid;    
+padding: 5px;
+    
+}
+
+#formbody{
+background-color: #E2FFC0;
+	
+}
+
+#schliessen{
+float: right;
+color: white;
+margin-right: 3px;
+cursor: pointer;
+}
+
+.clearboth{
+clear: both;
 }

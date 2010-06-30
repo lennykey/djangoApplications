@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Mannschaft(models.Model):
     name = models.CharField(max_length=30)
+    flagicon = models.CharField(max_length=10) 
     
     def __unicode__(self):
         return self.name

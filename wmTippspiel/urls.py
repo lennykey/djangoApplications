@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.conf.urls.defaults import *
-from wmTippspiel.views import index, regist, profil
+from wmTippspiel.views import index, regist, pwsend, profil
 from wmTippspiel.feedReader.views import feed 
 from django.contrib import admin
 
@@ -15,13 +15,16 @@ admin.autodiscover()
 # admin.autodiscover()
 
 urlpatterns = patterns('',
-    (r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': 'templates/'}),
+    #(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': 'templates/'}),
     #(r'^$', 'django.contrib.auth.views.login', {'template_name': 'appWMTippspiel/index.html'}),    
     (r'^$', feed),    
     (r'^regist/$', regist),
-    (r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'next_page':'/'}),
+    (r'^pwsend/$', pwsend),
+    (r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'next_page':'/wmtippspiel/'}),
     (r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'appWMTippspiel/falselogin.html'}),
     (r'^profil/$', profil),
+    url(r'^profil/(?P<player>\w+)$', profil),
+    
     # Example:
     # (r'^wmTippspiel/', include('wmTippspiel.foo.urls')),
 

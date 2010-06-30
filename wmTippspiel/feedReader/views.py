@@ -1,6 +1,6 @@
 # Create your views here.
 from django.shortcuts import render_to_response
-#import wmTippspiel
+import wmTippspiel
 from wmTippspiel.appWMTippspiel.views import punkteAuswerten
 
 import feedparser
@@ -15,10 +15,11 @@ def feed(request):
     #feed = feedparser.parse(feedURL)
     
     feed = feedStart(request)
+    #punkteListe = wmTippspiel.appWMTippspiel.views.punkteAuswerten(request)
     punkteListe = punkteAuswerten(request)
-   
     
     return render_to_response('appWMTippspiel/index.html',
+                             # {'entries': feed.entries[0:10]})
                               {'entries': feed.entries[0:10],'punkteListe': punkteListe[0:16]})
     
     

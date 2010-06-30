@@ -1,21 +1,26 @@
-{% extends "appWMTippspiel/base.html" %}
-{% block title %}Tippformular{% endblock %}
 
-{% block content %}
+
+
+{% block body %}
 
 {% ifequal request.method 'GET' %}
-<h1>Mein Tipp</h1>
-<form method="POST" action="tippausfuehren">
-<span>{{ begegnung }}</span>
-<input type="text" name="toreHeim" value={{tipp.toreHeim}} />
-<input type="text" name="toreGast" value={{tipp.toreGast}} />
-<input type="hidden" name="username" value="{{ username }}" />
-<input type="hidden" name="begegnungID" value="{{ begegnung.pk }}" />
-<input type="hidden" name="begegnung" value="{{ begegnung }}" />
+<div id="tippformbody">
 
-<input type="submit" name="senden" value="Tipp speichern">
+<form method="POST" action="/wmtippspiel/tippspiel/tippen/tipp-form/tippausfuehren">
+<table style="text-align:center;">
+	<tr><th>Datum</th><th>Heim-Mannschaft</th><th>Gast-Mannschaft</th><th>Gruppe</th></tr>
+	<tr><td>{{ begegnung.datum}}</td><td>{{ begegnung.mannschaftHeim }}</td><td>{{ begegnung.mannschaftGast}}</td><td>{{ begegnung.art}}</td><td>
+	</tr>
+	<tr><td>Mein Tipp:</td>
+		<td><input size="1" type="text" name="toreHeim" value={{tipp.toreHeim}} /></td>
+		<td><input size="1" type="text" name="toreGast" value={{tipp.toreGast}} />
+		<input type="hidden" name="username" value="{{ username }}" />
+		<input type="hidden" name="begegnungID" value="{{ begegnung.pk }}" />
+		<input type="hidden" name="begegnung" value="{{ begegnung }}" />
+		</td><td><input type="submit" name="senden" value="Tipp speichern"></td>
+</table>
 </form>
- 
+</div>
 {% else %}
 request.method
 

@@ -3,32 +3,80 @@
 
 {% block content %}
 
- <div id="content">
+  <div id="content">
         <div class="cboxl">
-        <h2>FIFA.com News</h2>
+        <h2 class="cont" >FIFA.com News</h2>
         {% if entries %}
         {% for feed in entries %}
-        <div class="feed"> <a href="{{ feed.link }}"><span class="feedtitle">{{ feed.title }}</span> </a> <div>{{feed.description|striptags}}</div></div>
+        <div class="feed">
+        <div class="feedimage"> 
+        <img src="{{ feed.id }}" alt="">
+        </div>
+        <div class="feedtext">  
+        <a href="{{ feed.link }}">
+        <span class="feedtitle">{{ feed.title }}</span>
+        </a>
+        <div>
+        {{ feed.description|striptags }}
+        </div>
+        <div class="feeddate" >
+        {{ feed.date }}
+        </div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
         {% endfor %}
 
         {% else %}
         <p>No Feed available</p>
         {% endif %}
         </div>
-        
+                
         <div class="cbox">
+        <div id="spielregeln" >
+            <div id="spielregelnhead" >
+            Spielregeln
+            <span id="spielregelnheadup" ><img src="/site_media/images/up3.png" /></span>
+            <span id="spielregelnheaddown"><img  src="/site_media/images/down3.png" /></span>
+            </div>
+            <div id="spielregelncontent">
+                <h3>Punktevergabe:</h3>
+                <div>4 Punkte für richtiges Ergebnis</div>
+                <div>2 Punkte für Tordifferenz und Sieger</div>
+                <div>1 Punkt Tendenz und Sieger</div>
+                <br/>
+                <div>Bei Unentschieden 4 Punkte, für richtiges Ergebnis</div>
+                <div>Bei Unentschieden 2 Punkte, bei nicht genauem Ergebnis</div>
+                <br/>
+                <div>Sonst 0 Punkte</div>
+                <br/>
+                <h3>Bei Finalrundenspiele:</h3>
+                <div>
+                    Grundlage sind die Ergebnisse nach 90 bzw. 120 Minuten.
+                </div>
+                
+            </div>   
+            
+        </div>
+                    
+            
         <h2>Highscore</h2>
         <table>
         
-        {% for user, punkte in punkteListe %}
+        {% for user, punkte, platz in punkteListe %}
         <tr>
-                <td style="width:200px"><a href="#">{{ user }}</a></td>
+                <td style="width:100px"><b>{{ platz }}</b></td>
+                <td style="width:200px"><a href="/wmtippspiel/profil/{{user}}">{{ user }}</a></td>
                 <td style="width:100px"><b>{{ punkte }}</b></td>
         </tr>
         
         {% endfor %}
          </table>
+         
+        
+        
         </div>
+        
         
         <div style="clear:both"></div>
     </div>

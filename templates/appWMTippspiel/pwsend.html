@@ -3,8 +3,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>WM - Tippspiel</title>
-<link rel="stylesheet" type="text/css" href="css/main.css"/>
-<link rel="stylesheet" type="text/css" href="css/content.css"/>
+<link rel="stylesheet" type="text/css" href="/site_media/css/main.css"/>
+<link rel="stylesheet" type="text/css" href="/site_media/css/content.css"/>
 </head>
 
 <body>
@@ -20,10 +20,15 @@
         <h2 class="con">Passwort zuschicken</h2>
             <div style="margin-left:75px">
             <p>Hier kannst du dir ein neues Passwort per Email zuschicken lassen. Sollte nach 15 Minuten immer noch keine Email eingetroffen sein (bitte auch im Spam-Ordner suchen), wende dich an einen der Administratoren.</p><br /><br />
-            <form action="#" method="post">
+            <form action="" method="post">
                 <div class="hlbox">Deine Email: <br /><input type="text" name="email" size="40" /></div>
                 <div class="hlbox">&nbsp; <br /><input class="sendbutton" type="submit" name="send" value="Senden" /></div>
             </form>
+            {% block content %}
+            <br /><br />
+            E-mail: {{ request.email }}<br />
+            User: {{ user.username }}
+            {% endblock %}
             </div>
         </div>
     </div>

@@ -6,11 +6,19 @@
 
 {% if tipps %}
     <p>Gefunden {{ tipps|length }} Tipp{{ tipps|pluralize }}.</p>
-    <ul>
-        {% for tipp in tipps %}
-        <li>{{ tipp }} <a href="/tippspiel/tippen/tipp-form/{{ tipp.begegnung.pk }}">Aendern</a</li>
-        {% endfor %}
-    </ul>
+	<table style="text-align:center;border-collapse:collapse;">
+	<tr><th style="border-bottom:1px solid black;">Datum</th><th style="border-bottom:1px solid black;">Heim-Mannschaft</th><th style="border-bottom:1px solid black;">Gast-Mannschaft</th><th style="border-bottom:1px solid black;">Gruppe</th></tr>
+	{% for tipp in tipps %}
+		<tr><td>{{ tipp.begegnung.datum}}</td><td>{{ tipp.begegnung.mannschaftHeim }}</td><td>{{ tipp.begegnung.mannschaftGast}}</td><td>{{ tipp.begegnung.art}}</td><td>
+		</tr>
+		<tr>
+		<td style="border-bottom:1px solid black;">Mein Tipp:</td>
+		<td style="border-bottom:1px solid black;">{{tipp.toreHeim}}</td>
+		<td style="border-bottom:1px solid black;">{{tipp.toreGast}}</td>
+		<td style="border-bottom:1px solid black;"><a href="/wmtippspiel/tippspiel/tippen/tipp-form/{{ tipp.begegnung.pk }}">&Auml;ndern</a></td>
+		</tr>
+	{% endfor %}
+	</table>
 {% else %}
     <p>No Tipps matched your search criteria.</p>
 {% endif %}

@@ -2,24 +2,99 @@
 {% block title %}Alle Begegnungen{% endblock %}
 
 {% block content %}
-<h2>Moegliche Tipps fuer {{username}}</h2>
 
-{% if begegnungen %}
-    <p>Gefunden {{ begegnungen|length }} Begegnung{{ begegnungen|pluralize }}.</p>
-    <ul>
-        {% for begegnung in begegnungen %}
-        <li>{{ begegnung.mannschaftHeim }} vs. {{ begegnung.mannschaftGast}}
-        <strong>{{ begegnung.art}}</strong> {{ begegnung.datum}}
-        {% if begegnung in tipps%}
-        <a href="/tippspiel/tippen/tipp-form/{{begegnung.id}}">Aendern</a>
+<!-- <a href="/wmtippspiel/tippspiel/tippen/">Alle</a> | <a id="toggle" href="#">Gruppen</a> -->
+<div id="gruppen">
+	<a id="gruppea" href="/wmtippspiel/tippspiel/tippen/GruppeA">Gruppe A</a>
+	<a id="gruppea" href="/wmtippspiel/tippspiel/tippen/GruppeB">Gruppe B</a>
+	<a id="gruppea" href="/wmtippspiel/tippspiel/tippen/GruppeC">Gruppe C</a>
+	<a id="gruppea" href="/wmtippspiel/tippspiel/tippen/GruppeD">Gruppe D</a>
+	<a id="gruppea" href="/wmtippspiel/tippspiel/tippen/GruppeE">Gruppe E</a>
+	<a id="gruppea" href="/wmtippspiel/tippspiel/tippen/GruppeF">Gruppe F</a>
+	<a id="gruppea" href="/wmtippspiel/tippspiel/tippen/GruppeG">Gruppe G</a>
+	<a id="gruppea" href="/wmtippspiel/tippspiel/tippen/GruppeH">Gruppe H</a>
+	
+</div>
+{% comment %} 
+{{ begegnungVorbei }}
+{% endcomment %}
+
+
+<div id="tipps">
+	<h2 class="cont">Moegliche Tipps fuer {{username}}</h2>
+{% if tipps %}
+    <!-- <p>Gefunden {{ tipps.begegnung|length }} Begegnung{{ tipps.begegnung|pluralize }}.</p>-->
+	
+    <table style="text-align:center; border:1px solid #DCDCDC;">
+		<tr class="tippszeile" >
+		<th class="tippzeilespaltedatum">Spieldatum</th>
+		<th class="tippzeilespalteheim">Heim</th>
+		<th class="tippzeilespaltegast">Gast</th>
+		<th class="tippzeilespaltegruppe">Gruppe</th>
+		<th>Tippen</th>
+		<th>Ergebnis</th>
+		<th>Tipp</th></tr>
+		{% for tipp in tipps %}
+		<tr>
+		<td>{{ tipp.begegnung.datum|date:"D d M H:i" }}</td>
+		<td class="tippzeilespalteeintragheim">{{ tipp.begegnung.mannschaftHeim }} <img src="/site_media/images/flagicons/{{tipp.begegnung.mannschaftHeim.flagicon}}.png" /></td>
+		<td class="tippzeilespalteeintraggast"><img src="/site_media/images/flagicons/{{tipp.begegnung.mannschaftGast.flagicon}}.png" /> {{ tipp.begegnung.mannschaftGast}}</td>
+		<td>{{ tipp.begegnung.art}}</td><td>
+
+		{% if tipp.begegnung in begegnungVorbei %}
+		Vorbei
         {% else %}
-        <a href="/tippspiel/tippen/tipp-form/{{begegnung.id}}">Jetzt Tippen</a>
-        {% endif %}
-          
-        {% endfor %}
-    </ul>
+		    {% if tipp.begegnung in mytipps %}
+		    <span class="tippaendern" name="{{tipp.begegnung.id}}">Tipp ändern</span>
+		    {% else %}
+		        <span class="tippaendern" name="{{tipp.begegnung.id}}">Jetzt tippen</span>
+		    {% endif %}
+		{% endif %}
+				
+		</td>
+		<td>{{tipp.begegnung.toreHeim}}:{{tipp.begegnung.toreGast}}</td>
+		<td>{{tipp.toreHeim}}:{{tipp.toreGast}}</td>
+		</tr>
+		
+		{% endfor %}
+    </table>
 {% else %}
-    <p>No Begegnung matched your search criteria.</p>
+<table style="text-align:center;">
+<tr><th>Spieldatum</th><th>Heim-Mannschaft</th><th>Gast-Mannschaft</th><th>Gruppe</th><th>Tipp</th><th>Ergebnis</th><th>Mein Tipp</th></tr>
+Keine Tipps gefunden
+</table>
 {% endif %}
+</div>
+
+<div id="tippformframe">
+<span id="schliessen">Schliessen</span>
+<div class="clearboth"></div>
+<div id="tippform">
+... laden
+</div>
+</div>
+
+<div id="nochzutippen">
+<h2 class="cont" >Offene Tipps</h2>
+<div style="border-style: solid; margin: 3px; padding: 3px;">Sobald die Finalrundenspiele feststehen, werden sie hier eingeblendet</div>
+{% if not begegnung %}
+<table>
+	{% for begegnung in begegnungen %}
+	{% if begegnung not in mytipps and begegnung.datum > jetzt  %}
+	<tr>
+		
+		<td class="tippen"><span name="{{ begegnung.id }}" >{{begegnung.datum|date:"D d M " }}{{begegnung.mannschaftHeim}} vs. {{begegnung.mannschaftGast}} </span> </td>
+		
+	</tr>
+	{% endif %}
+	{% endfor %}
+</table>
+{% else %}
+Alle Tipps wurden bereits getippt!
+{% endif %}
+</div>
+
+<div style="clear: both"></div>
+
 
 {% endblock %}
