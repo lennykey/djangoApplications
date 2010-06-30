@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{% block title %}WM - Tippspiel{% endblock %}</title>
+<link rel="stylesheet" type="text/css" href="/site_media/css/main.css"/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="/site_media/js/wmtippspiel.js"></script>
+
+
+</head>
+
+<body>
+
+<div id="main">
+	<div id="aheader"></div>
+
+	<div id="header">
+    
+    	<div id="hbanner"></div>
+    	<div id="hgreeting">
+    	<h2 class="con">Noch keinen Account?</h2>
+        <form action="/wmtippspiel/regist/" method="post">
+        {% csrf_token %}
+        {% if error %}
+        <b>{{ error }}</b>
+        {% endif %} 
+        <table>
+        	<tr>
+            	<td style="width:125px">Username: </td>
+                <td style="width:225px"><input type="text" name="username" size="25" /></td>
+            <tr>
+            <tr>
+            	<td>Passwort: </td>
+                <td><input type="password" name="password" size="25" /></td>
+            <tr>
+            <tr>
+            	<td>Deine E-mail: </td>
+                <td><input type="text" name="email" size="25" /></td>
+            <tr>
+            <tr>
+            	<td>&nbsp;</td>
+                <td><input class="registbutton" type="submit" name="regist" value="Registrieren" /></td>
+            <tr>
+        </table>
+        </form>
+        </div>
+        
+    	<div id="hlogin">
+        <h2 class="con">Auf zum Tippen...</h2>
+        {% block loginform %}
+
+        <form method="post" action="{% url django.contrib.auth.views.login %}">
+        {% csrf_token %}
+        	<div class="hlbox">Username:<br /><input type="text" name="username" size="20" /></div>
+            <div class="hlbox">Passwort:<br /><input type="password" name="password" size="20" /></div>
+            <div class="hlbox">&nbsp;<br /><input class="loginbutton" type="submit" name="login" value="Login" /></div>
+            <div class="hclear"><br /><br /><a href="/wmtippspiel/pwsend/">Passwort vergessen?</a></div>
+        </form>
+
+	{% endblock %}
+        </div>
+        
+        <div style="clear:both"></div>
+    </div>
+    
+    {% block content%}
+    <div id="content">
+    	<div class="cboxl">
+        <h2 class="cont" >FIFA.com News</h2>
+        {% if entries %}
+        {% for feed in entries %}
+        <div class="feed">
+		<div class="feedimage">	
+		<img src="{{ feed.id }}" alt="">
+		</div>
+		<div class="feedtext">	
+		<a href="{{ feed.link }}">
+		<span class="feedtitle">{{ feed.title }}</span>
+		</a>
+		<div>
+		{{ feed.description|striptags }}
+		</div>
+		<div class="feeddate" >
+		{{ feed.date }}
+		</div>
+		</div>
+		<div style="clear:both"></div>
+	</div>
+        {% endfor %}
+
+        {% else %}
+        <p>No Feed available</p>
+        {% endif %}
+        </div>
+        		
+        <div class="cbox">
+        <div id="spielregeln" >
+            <div id="spielregelnhead" >
+            <span>Spielregeln</span>
+			<span id="spielregelnheadup" ><img src="/site_media/images/up3.png" /></span>
+			<span id="spielregelnheaddown"><img  src="/site_media/images/down3.png" /></span>
+			</div>
+            <div id="spielregelncontent">
+                <br/>
+                <div>4 Punkte für richtiges Ergebnis</div>
+                <div>2 Punkte für Tordifferenz und Sieger</div>
+                <div>1 Punkt Tendenz und Sieger</div>
+                <br/>
+                <div>Bei Unentschieden 4 Punkte, für richtiges Ergebnis</div>
+                <div>Bei Unentschieden 2 Punkte, bei nicht genauem Ergebnis</div>
+                <br/>
+                Sonst 0 Punkte
+            </div>   
+			
+        </div>
+        			
+			
+        <h2>Highscore</h2>
+        <table>
+        
+        {% for user, punkte in punkteListe %}
+        <tr>
+            	<td style="width:200px"><a href="/wmtippspiel/profil/{{user}}">{{ user }}</a></td>
+                <td style="width:100px"><b>{{ punkte }}</b></td>
+        </tr>
+        
+        {% endfor %}
+         </table>
+		 
+		
+        
+        </div>
+		
+        
+        <div style="clear:both"></div>
+    </div>
+    {% endblock %}
+    
+    <div id="footer">
+    <p><a href="#">Impressum</a> | <a href="#">Internetprogrammierung</a> | <a href="http://www.facebook.com/group.php?gid=126218304077906&v=wall&ref=ts">Facebook</a> | <a href="#">usw.</a></p>
+    </div>
+</div>
+
+</body>
+</html>

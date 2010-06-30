@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{% block title %}WM Tippspiel{% endblock %}</title>
+
+<link rel="stylesheet" type="text/css" href="/site_media/css/main.css" />
+<link rel="stylesheet" type="text/css" href="/site_media/css/content.css" />
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="/site_media/js/wmtippspiel.js"></script> 
+</head>
+
+<body>
+
+<div id="main">
+	<div id="aheader"></div>
+
+	<div id="header">
+    
+    	<div id="hbanner"></div>
+    	<div id="navigation">
+        	<ul>
+            	<li><a href="/wmtippspiel/tippspiel/start/">Startseite</a></li>
+            	<li><a href="/wmtippspiel/tippspiel/tippen/">Tippen</a></li>
+                <li><a href="/wmtippspiel/profil/">Vergleich</a></li>
+				<li><a href="#"></a></li>
+                <li><a href="/wmtippspiel/accounts/logout/"><b>Abmelden</b></a></li>
+            </ul>
+        </div>
+        
+    </div>
+    
+    <div id="content">
+    {% block content %}
+
+    	<div id="cprofil">
+        <h2 class="cont">Neuigkeiten</h2>
+        <ul>
+        	<li>WM-Tippspiel beginnt...</li>
+            <li>Seite online...</li>
+        </ul>
+        </div>
+  
+        <div id="cmybets">
+        <h2 class="cont">Ergebnisticker</h2>
+        <table class="tbet" cellpadding="0" cellspacing="0">
+        	<tr>
+            	<td style="width:140px">&nbsp;</td>
+                <td style="width:50px">&nbsp;</td>
+                <td style="width:140px">&nbsp;</td>
+                <td style="width:50px"><b>Erg.</b></td>
+                <td style="width:50px"><b>Tipp</b></td>
+            </tr>
+            <tr onclick="window.location.href='#' onmouseout="this.style.backgroundColor='#FFFFFF'" onmouseover="this.style.backgroundColor='#D7D7D7'; this.style.cursor='hand';" style="clear: both; overflow: hidden; background-color: rgb(255, 255, 255);">
+            	<td>Deutschland</td>
+                <td>vs.</td>
+                <td>Ghana</td>
+                <td>1:0</td>
+                <td>2:0</td>
+            </tr>
+            <tr onclick="window.location.href='#' onmouseout="this.style.backgroundColor='#FFFFFF'" onmouseover="this.style.backgroundColor='#D7D7D7'; this.style.cursor='hand';" style="clear: both; overflow: hidden; background-color: rgb(255, 255, 255);">
+            	<td>Deutschland</td>
+                <td>vs.</td>
+                <td>Ghana</td>
+                <td>1:0</td>
+                <td>2:0</td>
+            </tr>
+            <tr onclick="window.location.href='#' onmouseout="this.style.backgroundColor='#FFFFFF'" onmouseover="this.style.backgroundColor='#D7D7D7'; this.style.cursor='hand';" style="clear: both; overflow: hidden; background-color: rgb(255, 255, 255);">
+            	<td>Deutschland</td>
+                <td>vs.</td>
+                <td>Ghana</td>
+                <td>1:0</td>
+                <td>2:0</td>
+            </tr>
+            <tr onclick="window.location.href='#' onmouseout="this.style.backgroundColor='#FFFFFF'" onmouseover="this.style.backgroundColor='#D7D7D7'; this.style.cursor='hand';" style="clear: both; overflow: hidden; background-color: rgb(255, 255, 255);">
+            	<td>Deutschland</td>
+                <td>vs.</td>
+                <td>Ghana</td>
+                <td>1:0</td>
+                <td>2:0</td>
+            </tr>
+        </table>
+        </div>
+        
+        <div style="clear:both"></div>
+    </div>
+   {% endblock %} 
+    <div id="footer">
+    <p><a href="#">Impressum</a> | <a href="http://python.cy55.de/">Internetprogrammierung mit Python</a> | <a href="http://www.facebook.com/group.php?gid=126218304077906&v=wall&ref=ts">Facebook</a> </p>
+    </div>
+</div>
+
+</body>
+</html>

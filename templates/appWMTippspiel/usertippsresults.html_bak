@@ -1,0 +1,17 @@
+{% extends "appWMTippspiel/base.html" %}
+{% block title %}Ergebnisse{% endblock %}
+
+{% block content %}
+<h2>Tipps von <strong>{{ username }}</h2>
+
+{% if tipps %}
+    <p>Gefunden {{ tipps|length }} Tipp{{ tipps|pluralize }}.</p>
+    <ul>
+        {% for tipp in tipps %}
+        <li>{{ tipp }} <a href="/tippspiel/tippen/tipp-form/{{ tipp.begegnung.pk }}">Aendern</a</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No Tipps matched your search criteria.</p>
+{% endif %}
+{% endblock %}

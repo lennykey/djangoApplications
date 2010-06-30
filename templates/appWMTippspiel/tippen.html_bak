@@ -1,0 +1,24 @@
+{% extends "appWMTippspiel/base.html" %}
+{% block title %}Alle Begegnungen{% endblock %}
+
+{% block content %}
+<h2>Moegliche Tipps fuer {{username}}</h2>
+
+{% if begegnungen %}
+    <p>Gefunden {{ begegnungen|length }} Begegnung{{ begegnungen|pluralize }}.</p>
+    <ul>
+        {% for begegnung in begegnungen %}
+        <li>{{ begegnung.mannschaftHeim }} vs. {{ begegnung.mannschaftGast}}
+        <strong>{{ begegnung.art}}</strong> {{ begegnung.datum}}
+        {% if begegnung in tipps%}
+        <a href="/tippspiel/tippen/tipp-form/{{begegnung.id}}">Aendern</a>
+        {% else %}
+        <a href="/tippspiel/tippen/tipp-form/{{begegnung.id}}">Jetzt Tippen</a>
+        {% endif %}
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No Begegnung matched your search criteria.</p>
+{% endif %}
+
+{% endblock %}

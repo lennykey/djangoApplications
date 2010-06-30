@@ -1,0 +1,68 @@
+{% extends "appWMTippspiel/base.html" %}
+{% block title %}User Profil{% endblock %}
+
+{% block content %}
+
+<div id="cprofil">
+        <h2 class="cont">Highscore</h2>
+        <table>
+        <tr>
+        <th>Platz</th>
+        <th>Spieler</th>
+        <th>Punkte</th>
+        </tr>
+        {% for user, punkte, platz in punkteListe %}
+        {% if myuser.username == user %}
+        <tr style="background-color: #ADD8E6;#add8e6;">
+        {% else %}
+        <tr>
+        {% endif %}
+                <td style="width:300px; text-align: center"><a href="/wmtippspiel/profil/{{ user }}">{{platz}}</a></td>
+                <td style="width:300px; text-align: center"><a href="/wmtippspiel/profil/{{ user }}">{{ user }}</a></td>
+                <td style="width:100px; text-align: center"><b>{{ punkte }}</b></td>
+        </tr>
+        {% endfor %}
+         </table>
+</div>
+
+<div id="cmybets">
+        <h2 class="cont">Ergebnisse von {{myuser.username}}</h2>
+        
+        {% if tipps %}
+        <table class="tbet" cellpadding="0" cellspacing="0">
+        	<tr>
+            	<td style="width:140px">&nbsp;</td>
+                <td style="width:50px">&nbsp;</td>
+                <td style="width:140px">&nbsp;</td>
+                <td style="width:50px"><b>Erg.</b></td>
+                <td style="width:50px"><b>Tipp</b></td>
+            </tr>
+            {% for tipp in tipps %}
+            {% if tipp.begegnung.toreHeim == tipp.toreHeim and tipp.begegnung.toreGast == tipp.toreGast %}
+            <tr class="vergleichzeile" onmouseout="this.style.backgroundColor='#CCFF00'" onmouseover="this.style.backgroundColor='#D7D7D7'; this.style.cursor='hand';" style="clear: both; overflow: hidden; background-color: #CCFF00;">
+            {% else %}
+            <tr class="vergleichzeile" onmouseout="this.style.backgroundColor='#FFFFFF'" onmouseover="this.style.backgroundColor='#D7D7D7'; this.style.cursor='hand';" style="clear: both; overflow: hidden; background-color: rgb(255, 255, 255);">
+            {% endif %}
+			    <td class="begegnungid">{{ tipp.begegnung.id }}</td>
+                <td>{{ tipp.begegnung.mannschaftHeim }}</td>
+                <td>vs.</td>
+                <td>{{ tipp.begegnung.mannschaftGast }}</td>
+                <td>{{ tipp.begegnung.toreHeim }}:{{ tipp.begegnung.toreGast }}</td>
+                <td>{{tipp.toreHeim}}:{{tipp.toreGast}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+            <p>No Tipps matched your search criteria.</p>
+        {% endif %}
+
+       
+</div>
+        
+<div style="clear:both"></div>
+
+<div id="tippsofbegegnung"> 
+        Es wird geladen ... 
+</div>
+
+{% endblock %}

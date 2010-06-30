@@ -1,0 +1,83 @@
+{% extends "appWMTippspiel/base.html" %}
+{% block title %}Alle Begegnungen{% endblock %}
+
+{% block content %}
+
+<!-- <a href="/wmtippspiel/tippspiel/tippen/">Alle</a> | <a id="toggle" href="#">Gruppen</a> -->
+<div id="gruppen">
+	<a id="gruppea" href="/wmtippspiel/tippspiel/tippen/GruppeA">Gruppe A</a>
+	<a id="gruppea" href="/wmtippspiel/tippspiel/tippen/GruppeB">Gruppe B</a>
+	<a id="gruppea" href="/wmtippspiel/tippspiel/tippen/GruppeC">Gruppe C</a>
+	<a id="gruppea" href="/wmtippspiel/tippspiel/tippen/GruppeD">Gruppe D</a>
+	<a id="gruppea" href="/wmtippspiel/tippspiel/tippen/GruppeE">Gruppe E</a>
+	<a id="gruppea" href="/wmtippspiel/tippspiel/tippen/GruppeF">Gruppe F</a>
+	<a id="gruppea" href="/wmtippspiel/tippspiel/tippen/GruppeG">Gruppe G</a>
+	<a id="gruppea" href="/wmtippspiel/tippspiel/tippen/GruppeH">Gruppe H</a>
+	
+</div>
+{% comment %} 
+{{ begegnungVorbei }}
+{% endcomment %}
+
+
+<div id="tipps">
+	<h2 class="cont">Moegliche Tipps fuer {{username}}</h2>
+{% if tipps %}
+    <!-- <p>Gefunden {{ tipps.begegnung|length }} Begegnung{{ tipps.begegnung|pluralize }}.</p>-->
+	
+    <table style="text-align:center; border:1px solid #DCDCDC;">
+		<tr ><th>Spieldatum</th><th>Heim</th><th>Gast</th><th>Gruppe</th><th>Tippen</th><th>Ergebnis</th><th>Tipp</th></tr>
+		{% for tipp in tipps %}
+		<tr class="tippszeile">
+		<td>{{ tipp.begegnung.datum|date:"D d M H:i" }}</td>
+		<td>{{ tipp.begegnung.mannschaftHeim }}</td>
+		<td>{{ tipp.begegnung.mannschaftGast}}</td>
+		<td>{{ tipp.begegnung.art}}</td><td>
+
+		{% if tipp.begegnung in begegnungVorbei %}
+		Vorbei
+        {% else %}
+		    {% if tipp.begegnung in mytipps %}
+		    <a id="tippaendern" href="/wmtippspiel/tippspiel/tippen/tipp-form/{{tipp.begegnung.id}}">Tipp ändern</a>
+		    {% else %}
+		        <a id="tippen" href="/wmtippspiel/tippspiel/tippen/tipp-form/{{tipp.begegnung.id}}">Jetzt tippen</a>
+		    {% endif %}
+		{% endif %}
+				
+		</td>
+		<td>{{tipp.begegnung.toreHeim}}:{{tipp.begegnung.toreGast}}</td>
+		<td>{{tipp.toreHeim}}:{{tipp.toreGast}}</td>
+		</tr>
+		
+		{% endfor %}
+    </table>
+{% else %}
+<table style="text-align:center;">
+<tr><th>Spieldatum</th><th>Heim-Mannschaft</th><th>Gast-Mannschaft</th><th>Gruppe</th><th>Tipp</th><th>Ergebnis</th><th>Mein Tipp</th></tr>
+Keine Tipps gefunden
+</table>
+{% endif %}
+</div>
+
+<div id="nochzutippen">
+<h2 class="cont" >Offene Tipps</h2>
+{% if not begegnung %}
+<table>
+	{% for begegnung in begegnungen %}
+	{% if begegnung not in mytipps and begegnung.datum > jetzt  %}
+	<tr>
+		
+		<td><a href="/wmtippspiel/tippspiel/tippen/tipp-form/{{ begegnung.id }}">{{begegnung.datum|date:"D d M " }}{{begegnung.mannschaftHeim}} vs. {{begegnung.mannschaftGast}} </a> </td>
+		
+	</tr>
+	{% endif %}
+	{% endfor %}
+</table>
+{% else %}
+Alle Tipps wurden bereits getippt!
+{% endif %}
+</div>
+
+<div style="clear: both"></div>
+
+{% endblock %}

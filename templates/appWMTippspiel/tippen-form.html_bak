@@ -1,0 +1,24 @@
+{% extends "appWMTippspiel/base.html" %}
+{% block title %}Tippformular{% endblock %}
+
+{% block content %}
+
+{% ifequal request.method 'GET' %}
+<h1>Mein Tipp</h1>
+<form method="POST" action="tippausfuehren">
+<span>{{ begegnung }}</span>
+<input type="text" name="toreHeim" value={{tipp.toreHeim}} />
+<input type="text" name="toreGast" value={{tipp.toreGast}} />
+<input type="hidden" name="username" value="{{ username }}" />
+<input type="hidden" name="begegnungID" value="{{ begegnung.pk }}" />
+<input type="hidden" name="begegnung" value="{{ begegnung }}" />
+
+<input type="submit" name="senden" value="Tipp speichern">
+</form>
+ 
+{% else %}
+request.method
+
+{% endifequal %}
+
+{% endblock %}

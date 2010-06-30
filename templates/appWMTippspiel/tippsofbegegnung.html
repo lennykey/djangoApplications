@@ -1,0 +1,13 @@
+<div id="tippsofbegegnunghead"><span>User Tipps von:</span><span style="float: right;">x</span> </div>
+{% for tipp in tipps %}
+<div style="margin-top: 3px; margin-left: 3px;">
+<span style="font-weight: bold; float:left;">{{ tipp.user }}&nbsp;</span>
+
+<span style="float:left;" >{{ tipp.toreHeim }}</span>
+<span style="float:left;">:</span>
+<span style="float:left;">{{ tipp.toreGast }}</span>
+
+</div>
+<div style="clear:both;"></div>
+{% endfor %}
+

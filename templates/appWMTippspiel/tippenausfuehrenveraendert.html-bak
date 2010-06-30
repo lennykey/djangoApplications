@@ -1,0 +1,8 @@
+{% extends "appWMTippspiel/base.html" %}
+{% block title %}Tipp erfolgreich geändert{% endblock %}
+
+{% block content %}
+
+<h2>Die Begegnung: {{begegnung}} wurde erfolgreich geändert!</h2>
+
+{% endblock %}
